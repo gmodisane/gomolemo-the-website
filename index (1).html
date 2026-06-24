@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gomolemo Modisane</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-size:16px;line-height:1.6;min-height:100vh;transition:background 0.5s,color 0.5s}
+
+    /* ── TOKENS ── */
+    :root{
+      --bg:#0C0C0E;--bg2:#121216;--fg:#F0F0EE;--fgm:#777;--border:#1E1E26;
+      --accent:#00E5C4;--accent-dim:rgba(0,229,196,0.1);
+      --r:8px;
+      --font-display:'Space Grotesk',sans-serif;
+      --font-body:'Inter',sans-serif;
+      --font-mono:'JetBrains Mono',monospace;
+    }
+    body.theme-biz{
+      --bg:#F7F3EC;--bg2:#EFE9DF;--fg:#1C1712;--fgm:#7A6F62;--border:#DDD5C8;
+      --accent:#A0692A;--accent-dim:rgba(160,105,42,0.1);
+      --font-display:'Lora',serif;--font-body:'Inter',sans-serif;
+    }
+    body.theme-me{
+      --bg:#F8F6FF;--bg2:#EEE9FB;--fg:#1A1530;--fgm:#8278A8;--border:#DAD3F2;
+      --accent:#6B48B8;--accent-dim:rgba(107,72,184,0.1);
+      --font-display:'DM Sans',sans-serif;--font-body:'DM Sans',sans-serif;
+    }
+
+    body{background:var(--bg);color:var(--fg);font-family:var(--font-body)}
+    a{color:var(--accent);text-decoration:none}
+
+    /* ── NAV ── */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:300;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0.9rem 2.5rem;
+      background:color-mix(in srgb,var(--bg) 80%,transparent);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border);
+      transition:background 0.5s,border-color 0.5s;
+    }
+    .nav-logo{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--fg);letter-spacing:-0.03em}
+    .nav-logo span{color:var(--accent)}
+    .nav-tabs{display:flex;gap:0.3rem}
+    .nav-tab{
+      padding:0.32rem 0.8rem;border-radius:6px;font-size:0.76rem;font-weight:600;
+      border:1px solid transparent;cursor:pointer;transition:all 0.2s;
+      background:transparent;color:var(--fgm);font-family:var(--font-body);
+    }
+    .nav-tab:hover{color:var(--fg);border-color:var(--border)}
+    .nav-tab.active{background:var(--accent);color:var(--bg);border-color:transparent}
+
+    /* ── PAGES ── */
+    .page{display:none}
+    .page.active{display:block;animation:fadein 0.5s ease}
+    @keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+    /* ── HERO SHELL ── */
+    .hero{
+      position:relative;min-height:100vh;display:flex;flex-direction:column;
+      justify-content:center;padding:5rem 2.5rem 3rem;max-width:900px;margin:0 auto;
+      overflow:hidden;
+    }
+    .hero-canvas{
+      position:fixed;inset:0;z-index:0;pointer-events:none;
+      opacity:0;transition:opacity 0.6s;
+    }
+    .hero-canvas.active{opacity:1}
+    .hero-content{position:relative;z-index:2}
+
+    /* CS HERO TEXT */
+    .cs-pre{font-family:var(--font-mono);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem}
+    .cs-pre span{color:var(--accent)}
+    .tw-wrap{
+      font-family:var(--font-display);font-size:clamp(2.6rem,6.5vw,4.6rem);
+      font-weight:700;line-height:1.06;letter-spacing:-0.04em;margin-bottom:1.5rem;
+      min-height:3.4em;
+    }
+    #tw-name{display:block;color:var(--fg)}
+    #tw-sub{
+      display:block;color:var(--fgm);font-weight:400;
+      font-size:clamp(0.9rem,2vw,1.15rem);margin-top:0.55rem;
+      font-family:var(--font-body);letter-spacing:0;
+    }
+    .cursor{
+      display:inline-block;width:2.5px;height:0.85em;background:var(--accent);
+      margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;transition:background 0.4s;
+    }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .hero-lead{max-width:500px;color:var(--fgm);font-size:0.92rem;line-height:1.85;margin-bottom:2.5rem}
+    .hero-lead strong{color:var(--fg);font-weight:500}
+
+    /* BIZ HERO TEXT */
+    .biz-h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:600;line-height:1.1;margin-bottom:1.25rem}
+    .biz-h1 em{color:var(--accent);font-style:italic}
+    .me-h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em}
+
+    /* BUTTONS */
+    .btn-row{display:flex;gap:0.7rem;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:0.4rem;padding:0.62rem 1.25rem;
+      border-radius:var(--r);font-family:var(--font-display);font-size:0.83rem;
+      font-weight:600;cursor:pointer;transition:all 0.2s;border:none;
+    }
+    .btn-solid{background:var(--accent);color:var(--bg)}
+    .btn-solid:hover{opacity:0.82;text-decoration:none}
+    .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+    /* ── SECTIONS ── */
+    .section{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
+    .eyebrow{
+      font-family:var(--font-mono);font-size:0.68rem;font-weight:400;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
+      display:flex;align-items:center;gap:0.75rem;
+    }
+    .eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
+    h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
+
+    /* ── EDITORIAL TEXT SECTIONS ── */
+    .editorial{margin-top:2rem}
+    .editorial-block{
+      display:grid;grid-template-columns:160px 1fr;gap:2rem;
+      padding:2rem 0;border-top:1px solid var(--border);
+    }
+    .editorial-block:last-child{border-bottom:1px solid var(--border)}
+    .editorial-label{
+      font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);
+      text-transform:uppercase;letter-spacing:0.1em;padding-top:4px;line-height:1.6;
+    }
+    .editorial-label strong{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--accent);letter-spacing:-0.03em;margin-bottom:0.25rem;font-style:normal}
+    .editorial-content h3{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:0.4rem}
+    .editorial-content p{font-size:0.88rem;color:var(--fgm);line-height:1.8}
+    .editorial-content p+p{margin-top:0.6rem}
+
+    /* ── PROJECT LIST (minimal cards) ── */
+    .proj-list{margin-top:2rem;display:flex;flex-direction:column;gap:0}
+    .proj-entry{
+      display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;
+      padding:1.75rem 0;border-top:1px solid var(--border);
+      transition:background 0.15s;
+    }
+    .proj-entry:last-child{border-bottom:1px solid var(--border)}
+    .proj-entry-left{}
+    .proj-num{font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);margin-bottom:0.4rem}
+    .proj-title{
+      font-family:var(--font-display);font-size:1.05rem;font-weight:600;
+      margin-bottom:0.5rem;color:var(--fg);
+      display:inline-flex;align-items:center;gap:0.5rem;
+    }
+    .proj-arrow{
+      opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s;
+      color:var(--accent);font-size:0.85rem;
+    }
+    .proj-entry:hover .proj-arrow{opacity:1;transform:none}
+    .proj-entry:hover .proj-title{color:var(--accent)}
+    .proj-title{transition:color 0.2s}
+    .proj-body{font-size:0.85rem;color:var(--fgm);line-height:1.8;max-width:560px}
+    .tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.75rem}
+    .tag{
+      font-size:0.65rem;font-weight:600;padding:0.16rem 0.5rem;border-radius:3px;
+      background:var(--accent-dim);color:var(--accent);letter-spacing:0.02em;transition:background 0.4s,color 0.4s;
+    }
+    .proj-year{font-family:var(--font-mono);font-size:0.72rem;color:var(--fgm);white-space:nowrap;padding-top:4px}
+
+    /* ── SKILLS EDITORIAL ── */
+    .skills-editorial{margin-top:2rem}
+    .skill-row{
+      display:grid;grid-template-columns:200px 1fr;gap:2rem;
+      padding:1.5rem 0;border-top:1px solid var(--border);align-items:baseline;
+    }
+    .skill-row:last-child{border-bottom:1px solid var(--border)}
+    .skill-category{font-family:var(--font-display);font-size:0.85rem;font-weight:600;color:var(--fg)}
+    .skill-items{font-size:0.85rem;color:var(--fgm);line-height:1.8}
+
+    /* ── SPOTLIGHT (Business featured project) ── */
+    .spotlight-wrap{margin-top:2rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .spotlight-kicker{font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
+    .spotlight-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:600;margin-bottom:1.25rem;line-height:1.2}
+    .spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+    .spotlight-body{font-size:0.88rem;color:var(--fgm);line-height:1.85}
+    .spotlight-body p+p{margin-top:0.75rem}
+    .spotlight-body strong{color:var(--fg);font-weight:500}
+    .spotlight-meta{display:flex;flex-direction:column;gap:1.25rem;padding-top:0.25rem}
+    .meta-block{}
+    .meta-label{font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.3rem}
+    .meta-val{font-size:0.85rem;color:var(--fgm);line-height:1.6}
+
+    /* ── TAKES / OPINIONS ── */
+    .takes{margin-top:2rem}
+    .take{padding:1.75rem 0;border-top:1px solid var(--border)}
+    .take:last-child{border-bottom:1px solid var(--border)}
+    .take-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.6rem}
+    .take-text{font-size:0.92rem;color:var(--fg);line-height:1.85;max-width:640px}
+
+    /* ── TRIED SECTION ── */
+    .tried-flow{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
+    .tried-pill{
+      font-size:0.8rem;color:var(--fgm);padding:0.35rem 0.85rem;
+      border:1px solid var(--border);border-radius:20px;
+      transition:border-color 0.2s,color 0.2s;cursor:default;
+    }
+    .tried-pill:hover{border-color:var(--accent);color:var(--accent)}
+
+    /* ── TIMELINE ── */
+    .timeline{margin-top:2rem}
+    .tl-row{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border)}
+    .tl-row:last-child{border-bottom:1px solid var(--border)}
+    .tl-yr{font-family:var(--font-mono);font-size:0.72rem;color:var(--accent);padding-top:3px}
+    .tl-content h3{font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.3rem}
+    .tl-content p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
+
+    /* ── CONTACT ── */
+    .contact-wrap{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
+    .contact-inner{padding:3rem 0;border-top:1px solid var(--border)}
+    .contact-inner h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
+    .contact-inner p{color:var(--fgm);font-size:0.9rem;max-width:400px;line-height:1.8;margin-bottom:2rem}
+    .contact-links{display:flex;gap:0.75rem;flex-wrap:wrap}
+    .contact-link{
+      display:inline-flex;align-items:center;gap:0.4rem;
+      padding:0.55rem 1.1rem;border:1px solid var(--border);border-radius:var(--r);
+      font-size:0.82rem;font-weight:500;color:var(--fgm);transition:all 0.2s;
+    }
+    .contact-link:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+    footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--fgm);display:flex;justify-content:space-between}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+    .reveal.vis{opacity:1;transform:none}
+
+    @media(max-width:640px){
+      .nav{padding:0.85rem 1.25rem}
+      .hero{padding:5rem 1.25rem 2.5rem}
+      .section{padding:3.5rem 1.25rem}
+      .contact-wrap{padding:3.5rem 1.25rem}
+      .editorial-block,.skill-row,.tl-row{grid-template-columns:1fr;gap:0.75rem}
+      .spotlight-grid{grid-template-columns:1fr}
+      footer{flex-direction:column;gap:0.3rem}
+    }
+    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.cursor{animation:none}}
+  </style>
+</head>
+<body>
+
+<!-- ANIMATED CANVASES (fixed, behind everything) -->
+<canvas id="canvas-cs" class="hero-canvas active"></canvas>
+<canvas id="canvas-biz" class="hero-canvas"></canvas>
+<canvas id="canvas-me" class="hero-canvas"></canvas>
+
+<nav class="nav">
+  <div class="nav-logo">G<span>.</span>Modisane</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-page="cs" data-theme="">CS</button>
+    <button class="nav-tab" data-page="biz" data-theme="theme-biz">Business</button>
+    <button class="nav-tab" data-page="me" data-theme="theme-me">Just Me</button>
+  </div>
+</nav>
+
+<!-- ════════════════ PAGE CS ════════════════ -->
+<div id="page-cs" class="page active">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="cs-pre">~/gomolemo-modisane <span>$</span></div>
+      <div class="tw-wrap">
+        <span id="tw-name"></span>
+        <span id="tw-sub"></span>
+        <span class="cursor"></span>
+      </div>
+      <p class="hero-lead">
+        I build <strong>systems that solve real problems</strong>. From cloud optimisation backends
+        on GCP to CPU scheduling simulators — software that actually works, not just compiles.
+      </p>
+      <div class="btn-row">
+        <a href="https://github.com/gomolemo-modisane" target="_blank" class="btn btn-solid">GitHub ↗</a>
+        <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-ghost">Email me</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Projects</div>
+    <h2 class="reveal">Things I've built.</h2>
+    <div class="proj-list">
+
+      <div class="proj-entry reveal">
+        <div class="proj-entry-left">
+          <div class="proj-num">01</div>
+          <div class="proj-title">CutList Optimiser <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">MaxCut is a well-known commercial cutting optimisation tool. I wanted to understand how something like it works — so I built my own version from scratch. A bin-packing solver that takes panel dimensions and computes optimal cut layouts to minimise waste, with printable PDF output.</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Bin Packing</span><span class="tag">PDF Generation</span><span class="tag">Algorithms</span></div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+
+      <div class="proj-entry reveal">
+        <div class="proj-entry-left">
+          <div class="proj-num">02</div>
+          <div class="proj-title">LRU Cache <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">Least Recently Used cache built from scratch — a doubly linked list and hashmap combined to hit O(1) get and put. A deliberate deep-dive into data structures rather than reaching for a library.</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span></div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+
+      <div class="proj-entry reveal">
+        <div class="proj-entry-left">
+          <div class="proj-num">03</div>
+          <div class="proj-title">Allegra the Barman <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">CPU scheduling simulator implementing FCFS, SJF, Priority, and MLFQ. Includes real experimental data collection and performance comparison across scheduling strategies.</div>
+          <div class="tags"><span class="tag">C</span><span class="tag">OS</span><span class="tag">Scheduling</span><span class="tag">Systems</span></div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+
+      <div class="proj-entry reveal">
+        <div class="proj-entry-left">
+          <div class="proj-num">04</div>
+          <div class="proj-title">AI Marking System <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">AI-assisted tool to help teachers mark student submissions faster. Sponsored semester project, built in a team of 5 under Mr Charles Mayosi at UCT. Full story on the Business page.</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span></div>
+        </div>
+        <div class="proj-year">2025</div>
+      </div>
+
+      <div class="proj-entry reveal">
+        <div class="proj-entry-left">
+          <div class="proj-num">05</div>
+          <div class="proj-title">Minimal Calculator <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">A clean, distraction-free calculator app. Sometimes the constraint of doing something simple really well teaches you more than a complex project.</div>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">UI</span></div>
+        </div>
+        <div class="proj-year">2024</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Stack</div>
+    <h2 class="reveal">What I work with.</h2>
+    <div class="skills-editorial">
+      <div class="skill-row reveal"><div class="skill-category">Languages</div><div class="skill-items">Python · Java · C · JavaScript · SQL</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Cloud & Infra</div><div class="skill-items">Google Cloud Run · Pub/Sub · Firestore · Docker · REST APIs</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Algorithms & DS</div><div class="skill-items">OR-Tools · Bin Packing · LRU Cache · CPU Scheduling · Graph Algorithms</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Systems</div><div class="skill-items">Operating Systems · Networking / BGP · TLS & Security · Concurrency</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Tools</div><div class="skill-items">Git & GitHub · Linux / Bash · VS Code · ReportLab</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Exploring</div><div class="skill-items">Distributed systems · Cloud architecture · Advanced ML</div></div>
+    </div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-inner reveal">
+      <h2>Let's build something.</h2>
+      <p>Open to grad roles, collabs, and conversations about interesting problems.</p>
+      <div class="contact-links">
+        <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
+        <a href="https://github.com/gomolemo-modisane" target="_blank" class="contact-link">⌥ GitHub</a>
+        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+</div>
+
+<!-- ════════════════ PAGE BUSINESS ════════════════ -->
+<div id="page-biz" class="page">
+  <div class="hero">
+    <div class="saturn"></div>
+    <div class="hero-content">
+      <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem">Business Computing</p>
+      <h1 class="biz-h1">Software that understands<br>the <em>business</em> it lives in.</h1>
+      <p class="hero-lead">
+        I study both CS and Business Computing at UCT. That means I think about <strong>why</strong> software
+        gets built, not just how. The South African digital economy is where I apply that lens most.
+      </p>
+      <div class="btn-row">
+        <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Featured project</div>
+    <div class="spotlight-wrap reveal">
+      <div class="spotlight-kicker">Semester Project · UCT · 2025</div>
+      <div class="spotlight-title">AI-Assisted Marking System</div>
+      <div class="spotlight-grid">
+        <div class="spotlight-body">
+          <p>Teachers spend hours marking the same types of student responses. This tool uses AI to flag, categorise, and draft feedback on submissions — cutting the time spent per script without removing the human in the loop.</p>
+          <p>The mission was simple: <strong>give teachers their evenings back.</strong></p>
+          <p>Built under the sponsorship of <strong>Mr Charles Mayosi</strong> at UCT, the project gave us a real brief, real accountability, and a real stakeholder to present to — not just a tutorial exercise.</p>
+          <div class="tags" style="margin-top:1rem"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span></div>
+        </div>
+        <div class="spotlight-meta">
+          <div class="meta-block"><div class="meta-label">Sponsor</div><div class="meta-val">Mr Charles Mayosi, UCT</div></div>
+          <div class="meta-block"><div class="meta-label">Team</div><div class="meta-val">5 people — cross-functional, mixed backgrounds</div></div>
+          <div class="meta-block"><div class="meta-label">Mission</div><div class="meta-val">Reduce time teachers spend marking using AI assistance</div></div>
+          <div class="meta-block"><div class="meta-label">Outcome</div><div class="meta-val">Working prototype generating draft feedback and flagging submissions for review</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Skills</div>
+    <h2 class="reveal">What Business Computing taught me.</h2>
+    <div class="skills-editorial">
+      <div class="skill-row reveal"><div class="skill-category">Project Management</div><div class="skill-items">Agile & Scrum · Risk management · Team dynamics · Stakeholder management · Reflective practice</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Design Thinking</div><div class="skill-items">Problem framing · User-centred design · Prototyping · Iteration · Empathy mapping</div></div>
+      <div class="skill-row reveal"><div class="skill-category">e-Commerce & IS</div><div class="skill-items">POPIA compliance · Platform economics · Digital markets · SA digital context · Business models</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Strategy</div><div class="skill-items">Cost-benefit analysis · Requirements analysis · Process modelling · Decision framing</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Digital Economy</div><div class="skill-items">Competition law · Self-preferencing · Digital colonialism · Surveillance capitalism · Gig economy</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Soft Skills</div><div class="skill-items">Cross-functional teams · Written communication · Stakeholder presentations · Working under ambiguity</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Focus areas</div>
+    <h2 class="reveal">Where my thinking lives.</h2>
+    <div class="editorial">
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>01</strong>e-Commerce in South Africa</div>
+        <div class="editorial-content"><p>Studied SA-specific digital commerce: POPIA compliance, platform economics, and the real constraints that load-shedding and data costs place on digital businesses — not in a textbook vacuum.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>02</strong>Competition Law & Big Tech</div>
+        <div class="editorial-content"><p>Interested in how large platforms interact with African markets. Self-preferencing, market dominance, and what good digital regulation looks like in a developing economy context.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>03</strong>Surveillance Capitalism</div>
+        <div class="editorial-content"><p>The trade-offs of data-driven business models run deeper than privacy — they reshape power. Studied through an IS lens and applied to platforms operating in SA.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>04</strong>The Gig Economy</div>
+        <div class="editorial-content"><p>Platforms like Uber and Mr D operate differently in SA than in the US. The labour conditions, income dependency, and regulatory gaps are distinct and worth taking seriously.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Journey</div>
+    <h2 class="reveal">Where I've been.</h2>
+    <div class="timeline">
+      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Started tutoring CSC1015F</h3><p>Selected as a first-year CS tutor at UCT. Renewed for a second year.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>AI Marking System — first sponsored project</h3><p>Worked in a team of 5 under Mr Charles Mayosi. First time delivering against a real brief with a real stakeholder.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>CutList Optimiser — reverse-engineering a commercial tool</h3><p>Set out to understand how optimisation software like MaxCut works by building my own from scratch.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>Final year — completing BSc CS & Business Computing</h3><p>Targeting my first role out of UCT. Ready for a position where both sides of my degree get used.</p></div></div>
+    </div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-inner reveal">
+      <h2>Let's talk.</h2>
+      <p>Interested in roles where technical and business thinking both matter.</p>
+      <div class="contact-links">
+        <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
+        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+</div>
+
+<!-- ════════════════ PAGE ME ════════════════ -->
+<div id="page-me" class="page">
+  <div class="hero">
+    <div class="hero-content">
+      <p style="font-family:var(--font-body);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem;font-weight:300;letter-spacing:0.05em">just me</p>
+      <h1 class="me-h1">Not everything<br>fits on a CV.</h1>
+      <p class="hero-lead" style="font-weight:300">
+        Third-year CS student from Johannesburg. I've tried probably every flavour of programming
+        at least once — if it involves code, I've poked at it. This is the page where I get to just be a person.
+      </p>
+      <div class="btn-row">
+        <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Say hi</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Interests</div>
+    <h2 class="reveal">Outside the IDE.</h2>
+    <div class="editorial">
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>⛩</strong>Anime</div>
+        <div class="editorial-content"><p>Yes, genuinely. It's where I go when I need my brain to stop thinking about systems design for five minutes. No apologies.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>🎮</strong>Gaming</div>
+        <div class="editorial-content"><p>Not just a hobby — games are some of the most complex interactive systems ever built. I pay attention to how they're designed, not just how they play.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>🔌</strong>Arduino & Hardware</div>
+        <div class="editorial-content"><p>When software isn't enough. Microcontrollers are how I end up at 1am wondering why a sensor won't read properly. I like problems that fight back.</p></div>
+      </div>
+      <div class="editorial-block reveal">
+        <div class="editorial-label"><strong>🌍</strong>African Tech</div>
+        <div class="editorial-content"><p>Building software differently when your context is South Africa — not Silicon Valley. The constraints are different. The problems are different. That's more interesting, not less.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Curiosity</div>
+    <h2 class="reveal">If it involves code, I've probably tried it.</h2>
+    <div class="tried-flow">
+      <span class="tried-pill reveal">Web development</span>
+      <span class="tried-pill reveal">Mobile apps</span>
+      <span class="tried-pill reveal">Arduino & hardware</span>
+      <span class="tried-pill reveal">Cloud infrastructure</span>
+      <span class="tried-pill reveal">AI & machine learning</span>
+      <span class="tried-pill reveal">Systems programming</span>
+      <span class="tried-pill reveal">Game development</span>
+      <span class="tried-pill reveal">Algorithm design</span>
+      <span class="tried-pill reveal">Databases</span>
+      <span class="tried-pill reveal">Security basics</span>
+      <span class="tried-pill reveal">Automation scripts</span>
+      <span class="tried-pill reveal">CLI tools</span>
+      <span class="tried-pill reveal">PDF generation</span>
+      <span class="tried-pill reveal">Data visualisation</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Strong opinions</div>
+    <h2 class="reveal">Things I actually think.</h2>
+    <div class="takes">
+      <div class="take reveal">
+        <div class="take-label">On building in South Africa</div>
+        <div class="take-text">Building software here means accepting constraints that most tutorials were never designed around. Load-shedding, data costs, connectivity gaps — these aren't edge cases. They're the brief. Working within them makes you a better engineer.</div>
+      </div>
+      <div class="take reveal">
+        <div class="take-label">On trying things before you're ready</div>
+        <div class="take-text">I picked up Arduino without knowing anything about electronics. Started tutoring before I felt like an expert. The curiosity comes first. The competence follows. Waiting until you're ready just means waiting.</div>
+      </div>
+      <div class="take reveal">
+        <div class="take-label">On GPA vs capability</div>
+        <div class="take-text">A number tells you how well someone handles a specific kind of pressure in a specific kind of system. It doesn't tell you whether they can actually build things. Both matter. Neither is everything.</div>
+      </div>
+      <div class="take reveal">
+        <div class="take-label">On this website</div>
+        <div class="take-text">Most portfolio sites look the same because most portfolio advice is the same. I built this one with three modes because I'm not one thing — and I was curious whether you could tell the difference between them.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-inner reveal">
+      <h2>I don't bite.</h2>
+      <p>If something on this page resonated, my inbox is open.</p>
+      <div class="contact-links">
+        <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
+        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
+        <a href="https://github.com/gomolemo-modisane" target="_blank" class="contact-link">⌥ GitHub</a>
+      </div>
+    </div>
+  </div>
+  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+</div>
+
+<script>
+// ── CANVAS: CS — particle network ──────────────────────────
+(function(){
+  const c = document.getElementById('canvas-cs');
+  const ctx = c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',()=>{resize();init()});
+  function init(){
+    pts=[];
+    const n=Math.floor((W*H)/14000);
+    for(let i=0;i<n;i++) pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.35,vy:(Math.random()-0.5)*0.35});
+  }
+  init();
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const col='rgba(0,229,196,';
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,1.5,0,Math.PI*2);
+      ctx.fillStyle=col+'0.6)';ctx.fill();
+      for(let j=i+1;j<pts.length;j++){
+        const q=pts[j];
+        const d=Math.hypot(p.x-q.x,p.y-q.y);
+        if(d<130){
+          ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle=col+(0.18*(1-d/130))+')';
+          ctx.lineWidth=0.7;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: BIZ — drifting geometric shapes ────────────────
+  const canvas = document.getElementById("canvas-biz");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let angle = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cx = canvas.width * 0.7;
+    const cy = canvas.height * 0.5;
+
+    // planet
+    ctx.beginPath();
+    ctx.arc(cx, cy, 60, 0, Math.PI * 2);
+    ctx.fillStyle = "#c89b5a";
+    ctx.fill();
+
+    // ring
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 100, 30, Math.PI / 6, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(200,155,90,0.5)";
+    ctx.stroke();
+
+    // orbiting particle
+    const x = cx + Math.cos(angle) * 120;
+    const y = cy + Math.sin(angle) * 40;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = "#f4d8a8";
+    ctx.fill();
+
+    angle += 0.01;
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+
+// ── CANVAS: ME — soft morphing blobs ──────────────────────
+(function(){
+  const c=document.getElementById('canvas-me');
+  const ctx=c.getContext('2d');
+  let W,H,t=0;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const blobs=[
+    {bx:0.25,by:0.3,r:0.22,spd:0.0008,phase:0},
+    {bx:0.75,by:0.2,r:0.18,spd:0.0012,phase:2.1},
+    {bx:0.5,by:0.7,r:0.25,spd:0.0006,phase:4.2},
+    {bx:0.15,by:0.75,r:0.14,spd:0.001,phase:1.0},
+    {bx:0.85,by:0.65,r:0.16,spd:0.0009,phase:3.5},
+  ];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    t++;
+    blobs.forEach(b=>{
+      const x=W*(b.bx+Math.sin(t*b.spd+b.phase)*0.06);
+      const y=H*(b.by+Math.cos(t*b.spd*1.3+b.phase)*0.05);
+      const r=Math.min(W,H)*b.r;
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      g.addColorStop(0,'rgba(107,72,184,0.13)');
+      g.addColorStop(1,'rgba(107,72,184,0)');
+      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── MODE SWITCHING ─────────────────────────────────────────
+const navTabs=document.querySelectorAll('.nav-tab');
+const pages=document.querySelectorAll('.page');
+const canvases={cs:document.getElementById('canvas-cs'),biz:document.getElementById('canvas-biz'),me:document.getElementById('canvas-me')};
+
+navTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    navTabs.forEach(t=>t.classList.remove('active'));
+    pages.forEach(p=>p.classList.remove('active'));
+    Object.values(canvases).forEach(c=>c.classList.remove('active'));
+    tab.classList.add('active');
+    const pg=tab.dataset.page;
+    document.body.className=tab.dataset.theme||'';
+    document.getElementById('page-'+pg).classList.add('active');
+    canvases[pg].classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(triggerReveal,120);
+  });
+});
+
+// ── TYPEWRITER ─────────────────────────────────────────────
+const seqs=[
+  {name:'Gomolemo Modisane',sub:'Software Developer & CS Student at UCT.'},
+  {name:'Gomolemo Modisane',sub:'Building systems that actually work.'},
+  {name:'Gomolemo Modisane',sub:'Business Computing. Because context matters.'},
+  {name:'Gomolemo Modisane',sub:'Tutor. Builder. Johannesburg native.'},
+  {name:'Gomolemo Modisane',sub:"If it involves code, I've probably tried it."},
+];
+let si=0,ci=0,phase='type-name';
+const nEl=document.getElementById('tw-name'),sEl=document.getElementById('tw-sub');
+function tw(){
+  const s=seqs[si];
+  if(phase==='type-name'){nEl.textContent=s.name.slice(0,++ci);if(ci>=s.name.length){phase='pause-name';ci=0;setTimeout(tw,480);return;}setTimeout(tw,55);}
+  else if(phase==='pause-name'){sEl.textContent='';phase='type-sub';setTimeout(tw,80);}
+  else if(phase==='type-sub'){sEl.textContent=s.sub.slice(0,++ci);if(ci>=s.sub.length){phase='pause-sub';ci=0;setTimeout(tw,2800);return;}setTimeout(tw,35);}
+  else if(phase==='pause-sub'){phase='erase-sub';ci=s.sub.length;setTimeout(tw,80);}
+  else if(phase==='erase-sub'){sEl.textContent=s.sub.slice(0,--ci);if(ci<=0){phase='erase-name';ci=s.name.length;setTimeout(tw,160);return;}setTimeout(tw,18);}
+  else if(phase==='erase-name'){nEl.textContent=s.name.slice(0,--ci);if(ci<=0){si=(si+1)%seqs.length;phase='type-name';ci=0;setTimeout(tw,320);return;}setTimeout(tw,30);}
+}
+tw();
+
+// ── SCROLL REVEAL ──────────────────────────────────────────
+function triggerReveal(){
+  const els=document.querySelectorAll('.page.active .reveal');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*50);obs.unobserve(e.target);}
+    });
+  },{threshold:0.06});
+  els.forEach(el=>{el.classList.remove('vis');obs.observe(el);});
+}
+triggerReveal();
+</script>
+</body>
+</html>
+HTMLEOF
