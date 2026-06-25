@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,244 +10,305 @@
     html{scroll-behavior:smooth}
     body{font-size:16px;line-height:1.6;min-height:100vh;transition:background 0.5s,color 0.5s}
 
-    /* ── TOKENS ── */
-    :root{
-      --bg:#0C0C0E;--bg2:#121216;--fg:#F0F0EE;--fgm:#777;--border:#1E1E26;
-      --accent:#00E5C4;--accent-dim:rgba(0,229,196,0.1);
-      --r:8px;
-      --font-display:'Space Grotesk',sans-serif;
-      --font-body:'Inter',sans-serif;
-      --font-mono:'JetBrains Mono',monospace;
-    }
-    body.theme-biz{
-      --bg:#F7F3EC;--bg2:#EFE9DF;--fg:#1C1712;--fgm:#7A6F62;--border:#DDD5C8;
-      --accent:#A0692A;--accent-dim:rgba(160,105,42,0.1);
-      --font-display:'Lora',serif;--font-body:'Inter',sans-serif;
-    }
-    body.theme-me{
-      --bg:#F8F6FF;--bg2:#EEE9FB;--fg:#1A1530;--fgm:#8278A8;--border:#DAD3F2;
-      --accent:#6B48B8;--accent-dim:rgba(107,72,184,0.1);
-      --font-display:'DM Sans',sans-serif;--font-body:'DM Sans',sans-serif;
-    }
+/* ── TOKENS ── */
+:root{
+  --bg:#0C0C0E;--bg2:#121216;--fg:#F0F0EE;--fgm:#777;--border:#1E1E26;
+  --accent:#00E5C4;--accent-dim:rgba(0,229,196,0.1);
+  --r:8px;
+  --font-display:'Space Grotesk',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+body.theme-biz{
+  --bg:#F7F3EC;--bg2:#EFE9DF;--fg:#1C1712;--fgm:#7A6F62;--border:#DDD5C8;
+  --accent:#A0692A;--accent-dim:rgba(160,105,42,0.1);
+  --font-display:'Lora',serif;--font-body:'Inter',sans-serif;
+}
+body.theme-me{
+  --bg:#0D0B14;--bg2:#130F1E;--fg:#EDE8FF;--fgm:#7A6FAA;--border:#221D36;
+  --accent:#A78BFA;--accent-dim:rgba(167,139,250,0.12);
+  --font-display:'DM Sans',sans-serif;--font-body:'DM Sans',sans-serif;
+}
 
-    body{background:var(--bg);color:var(--fg);font-family:var(--font-body)}
-    a{color:var(--accent);text-decoration:none}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body)}
+a{color:var(--accent);text-decoration:none}
 
-    /* ── NAV ── */
-    .nav{
-      position:fixed;top:0;left:0;right:0;z-index:300;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0.9rem 2.5rem;
-      background:color-mix(in srgb,var(--bg) 80%,transparent);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--border);
-      transition:background 0.5s,border-color 0.5s;
-    }
-    .nav-logo{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--fg);letter-spacing:-0.03em}
-    .nav-logo span{color:var(--accent)}
-    .nav-tabs{display:flex;gap:0.3rem}
-    .nav-tab{
-      padding:0.32rem 0.8rem;border-radius:6px;font-size:0.76rem;font-weight:600;
-      border:1px solid transparent;cursor:pointer;transition:all 0.2s;
-      background:transparent;color:var(--fgm);font-family:var(--font-body);
-    }
-    .nav-tab:hover{color:var(--fg);border-color:var(--border)}
-    .nav-tab.active{background:var(--accent);color:var(--bg);border-color:transparent}
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.9rem 2.5rem;
+  background:color-mix(in srgb,var(--bg) 80%,transparent);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.5s,border-color 0.5s;
+}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--fg);letter-spacing:-0.03em}
+.nav-logo span{color:var(--accent)}
+.nav-tabs{display:flex;gap:0.3rem}
+.nav-tab{
+  padding:0.32rem 0.8rem;border-radius:6px;font-size:0.76rem;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:all 0.2s;
+  background:transparent;color:var(--fgm);font-family:var(--font-body);
+}
+.nav-tab:hover{color:var(--fg);border-color:var(--border)}
+.nav-tab.active{background:var(--accent);color:var(--bg);border-color:transparent}
 
-    /* ── PAGES ── */
-    .page{display:none}
-    .page.active{display:block;animation:fadein 0.5s ease}
-    @keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block;animation:fadein 0.5s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-    /* ── HERO SHELL ── */
-    .hero{
-      position:relative;min-height:100vh;display:flex;flex-direction:column;
-      justify-content:center;padding:5rem 2.5rem 3rem;max-width:900px;margin:0 auto;
-      overflow:hidden;
-    }
-    .hero-canvas{
-      position:fixed;inset:0;z-index:0;pointer-events:none;
-      opacity:0;transition:opacity 0.6s;
-    }
-    .hero-canvas.active{opacity:1}
-    .hero-content{position:relative;z-index:2}
+/* ── HERO SHELL ── */
+.hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:5rem 2.5rem 3rem;max-width:900px;margin:0 auto;
+  overflow:hidden;
+}
+.hero-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:0;transition:opacity 0.6s;
+}
+.hero-canvas.active{opacity:1}
+.hero-content{position:relative;z-index:2}
 
-    /* CS HERO TEXT */
-    .cs-pre{font-family:var(--font-mono);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem}
-    .cs-pre span{color:var(--accent)}
-    .tw-wrap{
-      font-family:var(--font-display);font-size:clamp(2.6rem,6.5vw,4.6rem);
-      font-weight:700;line-height:1.06;letter-spacing:-0.04em;margin-bottom:1.5rem;
-      min-height:3.4em;
-    }
-    #tw-name{display:block;color:var(--fg)}
-    #tw-sub{
-      display:block;color:var(--fgm);font-weight:400;
-      font-size:clamp(0.9rem,2vw,1.15rem);margin-top:0.55rem;
-      font-family:var(--font-body);letter-spacing:0;
-    }
-    .cursor{
-      display:inline-block;width:2.5px;height:0.85em;background:var(--accent);
-      margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;transition:background 0.4s;
-    }
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-    .hero-lead{max-width:500px;color:var(--fgm);font-size:0.92rem;line-height:1.85;margin-bottom:2.5rem}
-    .hero-lead strong{color:var(--fg);font-weight:500}
+/* CS HERO TEXT */
+.cs-pre{font-family:var(--font-mono);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem}
+.cs-pre span{color:var(--accent)}
+.tw-wrap{
+  font-family:var(--font-display);font-size:clamp(2.6rem,6.5vw,4.6rem);
+  font-weight:700;line-height:1.06;letter-spacing:-0.04em;margin-bottom:1.5rem;
+  min-height:3.4em;
+}
+#tw-name{display:block;color:var(--fg)}
+#tw-sub{
+  display:block;color:var(--fgm);font-weight:400;
+  font-size:clamp(0.9rem,2vw,1.15rem);margin-top:0.55rem;
+  font-family:var(--font-body);letter-spacing:0;
+}
+.cursor{
+  display:inline-block;width:2.5px;height:0.85em;background:var(--accent);
+  margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite;transition:background 0.4s;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-lead{max-width:500px;color:var(--fgm);font-size:0.92rem;line-height:1.85;margin-bottom:2.5rem}
+.hero-lead strong{color:var(--fg);font-weight:500}
 
-    /* BIZ HERO TEXT */
-    .biz-h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:600;line-height:1.1;margin-bottom:1.25rem}
-    .biz-h1 em{color:var(--accent);font-style:italic}
-    .me-h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em}
+/* BIZ HERO TEXT */
+.biz-h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:600;line-height:1.1;margin-bottom:1.25rem}
+.biz-h1 em{color:var(--accent);font-style:italic}
+.me-h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em}
 
-    /* BUTTONS */
-    .btn-row{display:flex;gap:0.7rem;flex-wrap:wrap}
-    .btn{
-      display:inline-flex;align-items:center;gap:0.4rem;padding:0.62rem 1.25rem;
-      border-radius:var(--r);font-family:var(--font-display);font-size:0.83rem;
-      font-weight:600;cursor:pointer;transition:all 0.2s;border:none;
-    }
-    .btn-solid{background:var(--accent);color:var(--bg)}
-    .btn-solid:hover{opacity:0.82;text-decoration:none}
-    .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
-    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+/* BUTTONS */
+.btn-row{display:flex;gap:0.7rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:0.4rem;padding:0.62rem 1.25rem;
+  border-radius:var(--r);font-family:var(--font-display);font-size:0.83rem;
+  font-weight:600;cursor:pointer;transition:all 0.2s;border:none;
+}
+.btn-solid{background:var(--accent);color:var(--bg)}
+.btn-solid:hover{opacity:0.82;text-decoration:none}
+.btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 
-    /* ── SECTIONS ── */
-    .section{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
-    .eyebrow{
-      font-family:var(--font-mono);font-size:0.68rem;font-weight:400;letter-spacing:0.14em;
-      text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
-      display:flex;align-items:center;gap:0.75rem;
-    }
-    .eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
-    h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
+/* ── SECTIONS ── */
+.section{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
+.eyebrow{
+  font-family:var(--font-mono);font-size:0.68rem;font-weight:400;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
+h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
 
-    /* ── EDITORIAL TEXT SECTIONS ── */
-    .editorial{margin-top:2rem}
-    .editorial-block{
-      display:grid;grid-template-columns:160px 1fr;gap:2rem;
-      padding:2rem 0;border-top:1px solid var(--border);
-    }
-    .editorial-block:last-child{border-bottom:1px solid var(--border)}
-    .editorial-label{
-      font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);
-      text-transform:uppercase;letter-spacing:0.1em;padding-top:4px;line-height:1.6;
-    }
-    .editorial-label strong{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--accent);letter-spacing:-0.03em;margin-bottom:0.25rem;font-style:normal}
-    .editorial-content h3{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:0.4rem}
-    .editorial-content p{font-size:0.88rem;color:var(--fgm);line-height:1.8}
-    .editorial-content p+p{margin-top:0.6rem}
+/* ── EDITORIAL TEXT SECTIONS ── */
+.editorial{margin-top:2rem}
+.editorial-block{
+  display:grid;grid-template-columns:160px 1fr;gap:2rem;
+  padding:2rem 0;border-top:1px solid var(--border);
+}
+.editorial-block:last-child{border-bottom:1px solid var(--border)}
+.editorial-label{
+  font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);
+  text-transform:uppercase;letter-spacing:0.1em;padding-top:4px;line-height:1.6;
+}
+.editorial-label strong{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:700;color:var(--accent);letter-spacing:-0.03em;margin-bottom:0.25rem;font-style:normal}
+.editorial-content h3{font-family:var(--font-display);font-size:1rem;font-weight:600;margin-bottom:0.4rem}
+.editorial-content p{font-size:0.88rem;color:var(--fgm);line-height:1.8}
+.editorial-content p+p{margin-top:0.6rem}
 
-    /* ── PROJECT LIST (minimal cards) ── */
-    .proj-list{margin-top:2rem;display:flex;flex-direction:column;gap:0}
-    .proj-entry{
-      display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;
-      padding:1.75rem 0;border-top:1px solid var(--border);
-      transition:background 0.15s;
-    }
-    .proj-entry:last-child{border-bottom:1px solid var(--border)}
-    .proj-entry-left{}
-    .proj-num{font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);margin-bottom:0.4rem}
-    .proj-title{
-      font-family:var(--font-display);font-size:1.05rem;font-weight:600;
-      margin-bottom:0.5rem;color:var(--fg);
-      display:inline-flex;align-items:center;gap:0.5rem;
-    }
-    .proj-arrow{
-      opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s;
-      color:var(--accent);font-size:0.85rem;
-    }
-    .proj-entry:hover .proj-arrow{opacity:1;transform:none}
-    .proj-entry:hover .proj-title{color:var(--accent)}
-    .proj-title{transition:color 0.2s}
-    .proj-body{font-size:0.85rem;color:var(--fgm);line-height:1.8;max-width:560px}
-    .tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.75rem}
-    .tag{
-      font-size:0.65rem;font-weight:600;padding:0.16rem 0.5rem;border-radius:3px;
-      background:var(--accent-dim);color:var(--accent);letter-spacing:0.02em;transition:background 0.4s,color 0.4s;
-    }
-    .proj-year{font-family:var(--font-mono);font-size:0.72rem;color:var(--fgm);white-space:nowrap;padding-top:4px}
+/* ── PROJECT LIST ── */
+.proj-list{margin-top:2rem;display:flex;flex-direction:column;gap:0}
+.proj-entry{
+  display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;
+  padding:1.75rem 0;border-top:1px solid var(--border);
+  transition:background 0.15s;
+}
+.proj-entry:last-child{border-bottom:1px solid var(--border)}
+.proj-num{font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);margin-bottom:0.4rem}
+.proj-title{
+  font-family:var(--font-display);font-size:1.05rem;font-weight:600;
+  margin-bottom:0.5rem;color:var(--fg);
+  display:inline-flex;align-items:center;gap:0.5rem;
+}
+.proj-arrow{
+  opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s;
+  color:var(--accent);font-size:0.85rem;
+}
+.proj-entry:hover .proj-arrow{opacity:1;transform:none}
+.proj-entry:hover .proj-title{color:var(--accent)}
+.proj-title{transition:color 0.2s}
+.proj-body{font-size:0.85rem;color:var(--fgm);line-height:1.8;max-width:560px}
+.proj-learned{
+  margin-top:0.85rem;padding:0.75rem 1rem;
+  border-left:2px solid var(--accent);background:var(--accent-dim);
+  border-radius:0 var(--r) var(--r) 0;
+}
+.proj-learned-label{font-family:var(--font-mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.3rem}
+.proj-learned p{font-size:0.8rem;color:var(--fgm);line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.75rem}
+.tag{
+  font-size:0.65rem;font-weight:600;padding:0.16rem 0.5rem;border-radius:3px;
+  background:var(--accent-dim);color:var(--accent);letter-spacing:0.02em;transition:background 0.4s,color 0.4s;
+}
+.proj-year{font-family:var(--font-mono);font-size:0.72rem;color:var(--fgm);white-space:nowrap;padding-top:4px}
 
-    /* ── SKILLS EDITORIAL ── */
-    .skills-editorial{margin-top:2rem}
-    .skill-row{
-      display:grid;grid-template-columns:200px 1fr;gap:2rem;
-      padding:1.5rem 0;border-top:1px solid var(--border);align-items:baseline;
-    }
-    .skill-row:last-child{border-bottom:1px solid var(--border)}
-    .skill-category{font-family:var(--font-display);font-size:0.85rem;font-weight:600;color:var(--fg)}
-    .skill-items{font-size:0.85rem;color:var(--fgm);line-height:1.8}
+/* ── SKILLS EDITORIAL ── */
+.skills-editorial{margin-top:2rem}
+.skill-row{
+  display:grid;grid-template-columns:200px 1fr;gap:2rem;
+  padding:1.5rem 0;border-top:1px solid var(--border);align-items:baseline;
+}
+.skill-row:last-child{border-bottom:1px solid var(--border)}
+.skill-category{font-family:var(--font-display);font-size:0.85rem;font-weight:600;color:var(--fg)}
+.skill-items{font-size:0.85rem;color:var(--fgm);line-height:1.8}
 
-    /* ── SPOTLIGHT (Business featured project) ── */
-    .spotlight-wrap{margin-top:2rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .spotlight-kicker{font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
-    .spotlight-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:600;margin-bottom:1.25rem;line-height:1.2}
-    .spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-    .spotlight-body{font-size:0.88rem;color:var(--fgm);line-height:1.85}
-    .spotlight-body p+p{margin-top:0.75rem}
-    .spotlight-body strong{color:var(--fg);font-weight:500}
-    .spotlight-meta{display:flex;flex-direction:column;gap:1.25rem;padding-top:0.25rem}
-    .meta-block{}
-    .meta-label{font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.3rem}
-    .meta-val{font-size:0.85rem;color:var(--fgm);line-height:1.6}
+/* ── SPOTLIGHT ── */
+.spotlight-wrap{margin-top:2rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.spotlight-kicker{font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
+.spotlight-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:600;margin-bottom:1.25rem;line-height:1.2}
+.spotlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.spotlight-body{font-size:0.88rem;color:var(--fgm);line-height:1.85}
+.spotlight-body p+p{margin-top:0.75rem}
+.spotlight-body strong{color:var(--fg);font-weight:500}
+.spotlight-meta{display:flex;flex-direction:column;gap:1.25rem;padding-top:0.25rem}
+.meta-block{}
+.meta-label{font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.3rem}
+.meta-val{font-size:0.85rem;color:var(--fgm);line-height:1.6}
 
-    /* ── TAKES / OPINIONS ── */
-    .takes{margin-top:2rem}
-    .take{padding:1.75rem 0;border-top:1px solid var(--border)}
-    .take:last-child{border-bottom:1px solid var(--border)}
-    .take-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.6rem}
-    .take-text{font-size:0.92rem;color:var(--fg);line-height:1.85;max-width:640px}
+/* ── TEAMWORK HIGHLIGHT ── */
+.team-block{
+  margin-top:1.5rem;padding:1.5rem;
+  border:1px solid var(--border);border-radius:var(--r);
+  background:var(--accent-dim);
+}
+.team-block-label{font-family:var(--font-mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--accent);margin-bottom:0.6rem}
+.team-block p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
+.team-block strong{color:var(--fg);font-weight:500}
 
-    /* ── TRIED SECTION ── */
-    .tried-flow{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
-    .tried-pill{
-      font-size:0.8rem;color:var(--fgm);padding:0.35rem 0.85rem;
-      border:1px solid var(--border);border-radius:20px;
-      transition:border-color 0.2s,color 0.2s;cursor:default;
-    }
-    .tried-pill:hover{border-color:var(--accent);color:var(--accent)}
+/* ── TAKES / OPINIONS ── */
+.takes{margin-top:2rem}
+.take{padding:1.75rem 0;border-top:1px solid var(--border)}
+.take:last-child{border-bottom:1px solid var(--border)}
+.take-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.6rem}
+.take-text{font-size:0.92rem;color:var(--fg);line-height:1.85;max-width:640px}
 
-    /* ── TIMELINE ── */
-    .timeline{margin-top:2rem}
-    .tl-row{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border)}
-    .tl-row:last-child{border-bottom:1px solid var(--border)}
-    .tl-yr{font-family:var(--font-mono);font-size:0.72rem;color:var(--accent);padding-top:3px}
-    .tl-content h3{font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.3rem}
-    .tl-content p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
+/* ── TRIED SECTION ── */
+.tried-flow{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
+.tried-pill{
+  font-size:0.8rem;color:var(--fgm);padding:0.35rem 0.85rem;
+  border:1px solid var(--border);border-radius:20px;
+  transition:border-color 0.2s,color 0.2s;cursor:default;
+}
+.tried-pill:hover{border-color:var(--accent);color:var(--accent)}
 
-    /* ── CONTACT ── */
-    .contact-wrap{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
-    .contact-inner{padding:3rem 0;border-top:1px solid var(--border)}
-    .contact-inner h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
-    .contact-inner p{color:var(--fgm);font-size:0.9rem;max-width:400px;line-height:1.8;margin-bottom:2rem}
-    .contact-links{display:flex;gap:0.75rem;flex-wrap:wrap}
-    .contact-link{
-      display:inline-flex;align-items:center;gap:0.4rem;
-      padding:0.55rem 1.1rem;border:1px solid var(--border);border-radius:var(--r);
-      font-size:0.82rem;font-weight:500;color:var(--fgm);transition:all 0.2s;
-    }
-    .contact-link:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+/* ── TIMELINE ── */
+.timeline{margin-top:2rem}
+.tl-row{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border)}
+.tl-row:last-child{border-bottom:1px solid var(--border)}
+.tl-yr{font-family:var(--font-mono);font-size:0.72rem;color:var(--accent);padding-top:3px}
+.tl-content h3{font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.3rem}
+.tl-content p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
 
-    footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--fgm);display:flex;justify-content:space-between}
+/* ── VALUES GRID (Me page) ── */
+.values-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  margin-top:2rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+}
+.value-cell{
+  padding:1.75rem 1.25rem;background:var(--bg2);
+  display:flex;flex-direction:column;gap:0.5rem;
+  transition:background 0.2s;
+}
+.value-cell:hover{background:var(--accent-dim)}
+.value-icon{font-size:1.5rem;line-height:1}
+.value-name{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--fg)}
+.value-sub{font-size:0.75rem;color:var(--fgm);line-height:1.6}
 
-    /* ── REVEAL ── */
-    .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
-    .reveal.vis{opacity:1;transform:none}
+/* ── ANIME LESSON ── */
+.anime-lessons{margin-top:2rem}
+.anime-lesson{
+  padding:1.5rem 0;border-top:1px solid var(--border);
+  display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:start;
+}
+.anime-lesson:last-child{border-bottom:1px solid var(--border)}
+.anime-lesson-num{
+  font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);
+  padding-top:3px;
+}
+.anime-lesson h4{font-family:var(--font-display);font-size:0.9rem;font-weight:600;margin-bottom:0.35rem;color:var(--fg)}
+.anime-lesson p{font-size:0.84rem;color:var(--fgm);line-height:1.8}
 
-    @media(max-width:640px){
-      .nav{padding:0.85rem 1.25rem}
-      .hero{padding:5rem 1.25rem 2.5rem}
-      .section{padding:3.5rem 1.25rem}
-      .contact-wrap{padding:3.5rem 1.25rem}
-      .editorial-block,.skill-row,.tl-row{grid-template-columns:1fr;gap:0.75rem}
-      .spotlight-grid{grid-template-columns:1fr}
-      footer{flex-direction:column;gap:0.3rem}
-    }
-    @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.cursor{animation:none}}
+/* ── ORIGIN STORY ── */
+.origin-flow{margin-top:2rem}
+.origin-beat{
+  display:grid;grid-template-columns:120px 1fr;gap:2rem;
+  padding:1.75rem 0;border-top:1px solid var(--border);
+}
+.origin-beat:last-child{border-bottom:1px solid var(--border)}
+.origin-era{
+  font-family:var(--font-display);font-size:0.8rem;font-weight:600;
+  color:var(--accent);padding-top:3px;line-height:1.5;
+}
+.origin-era span{display:block;font-family:var(--font-mono);font-size:0.6rem;font-weight:400;color:var(--fgm);margin-top:0.2rem;text-transform:uppercase;letter-spacing:0.08em}
+.origin-text p{font-size:0.88rem;color:var(--fgm);line-height:1.85}
+.origin-text p+p{margin-top:0.6rem}
+.origin-text strong{color:var(--fg);font-weight:500}
+
+/* ── CONTACT ── */
+.contact-wrap{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
+.contact-inner{padding:3rem 0;border-top:1px solid var(--border)}
+.contact-inner h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
+.contact-inner p{color:var(--fgm);font-size:0.9rem;max-width:400px;line-height:1.8;margin-bottom:2rem}
+.contact-links{display:flex;gap:0.75rem;flex-wrap:wrap}
+.contact-link{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.55rem 1.1rem;border:1px solid var(--border);border-radius:var(--r);
+  font-size:0.82rem;font-weight:500;color:var(--fgm);transition:all 0.2s;
+}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--fgm);display:flex;justify-content:space-between}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:640px){
+  .nav{padding:0.85rem 1.25rem}
+  .hero{padding:5rem 1.25rem 2.5rem}
+  .section{padding:3.5rem 1.25rem}
+  .contact-wrap{padding:3.5rem 1.25rem}
+  .editorial-block,.skill-row,.tl-row,.origin-beat{grid-template-columns:1fr;gap:0.75rem}
+  .spotlight-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:repeat(2,1fr)}
+  footer{flex-direction:column;gap:0.3rem}
+}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.cursor{animation:none}}
   </style>
 </head>
 <body>
 
-<!-- ANIMATED CANVASES (fixed, behind everything) -->
 <canvas id="canvas-cs" class="hero-canvas active"></canvas>
 <canvas id="canvas-biz" class="hero-canvas"></canvas>
 <canvas id="canvas-me" class="hero-canvas"></canvas>
@@ -263,6 +323,7 @@
 </nav>
 
 <!-- ════════════════ PAGE CS ════════════════ -->
+
 <div id="page-cs" class="page active">
   <div class="hero">
     <div class="hero-content">
@@ -284,6 +345,21 @@
   </div>
 
   <div class="section">
+    <div class="eyebrow reveal">Experience</div>
+    <h2 class="reveal">Where I've put it to use.</h2>
+    <div class="skills-editorial">
+      <div class="skill-row reveal">
+        <div class="skill-category">CS Tutor — UCT<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">CSC1015F · 2024–2025</span></div>
+        <div class="skill-items">Selected as a first-year CS tutor at UCT and renewed for a second year. Helping students understand programming fundamentals — and realising that explaining something clearly is often the deepest test of whether you actually know it.</div>
+      </div>
+      <div class="skill-row reveal">
+        <div class="skill-category">Reading Tutor — Leo Library<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">Community · Johannesburg</span></div>
+        <div class="skill-items">Volunteered as a reading tutor at the Leo Library, working with young readers to build literacy skills. A reminder that technology only matters if the people who need it most can access it — and that access starts with reading.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
     <div class="eyebrow reveal">Projects</div>
     <h2 class="reveal">Things I've built.</h2>
     <div class="proj-list">
@@ -292,8 +368,12 @@
         <div class="proj-entry-left">
           <div class="proj-num">01</div>
           <div class="proj-title">CutList Optimiser <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">MaxCut is a well-known commercial cutting optimisation tool. I wanted to understand how something like it works — so I built my own version from scratch. A bin-packing solver that takes panel dimensions and computes optimal cut layouts to minimise waste, with printable PDF output.</div>
-          <div class="tags"><span class="tag">Python</span><span class="tag">Bin Packing</span><span class="tag">PDF Generation</span><span class="tag">Algorithms</span></div>
+          <div class="proj-body">MaxCut is a well-known commercial cutting optimisation tool. I wanted to understand how something like it works — so I built my own from scratch. A bin-packing solver that takes panel dimensions and computes optimal cut layouts to minimise waste, with printable PDF output.<br><br>The hard part wasn't the algorithm — it was the constraint that real wood panels have grain direction, saw blade kerf, and minimum offcut sizes. The solver needed to model the physical reality, not just the maths.</div>
+          <div class="proj-learned">
+            <div class="proj-learned-label">What I learned</div>
+            <p>Optimisation problems look simple on paper. Translating physical constraints (kerf width, grain direction, minimum usable offcuts) into solver constraints is where most of the real work lives. OR-Tools is powerful but unforgiving — it will find the edge cases in your model.</p>
+          </div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Bin Packing</span><span class="tag">OR-Tools</span><span class="tag">PDF Generation</span><span class="tag">Algorithms</span></div>
         </div>
         <div class="proj-year">2025</div>
       </div>
@@ -302,7 +382,11 @@
         <div class="proj-entry-left">
           <div class="proj-num">02</div>
           <div class="proj-title">LRU Cache <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">Least Recently Used cache built from scratch — a doubly linked list and hashmap combined to hit O(1) get and put. A deliberate deep-dive into data structures rather than reaching for a library.</div>
+          <div class="proj-body">Least Recently Used cache built from scratch — a doubly linked list and hashmap combined to hit O(1) get and put. A deliberate deep-dive into data structures rather than reaching for a library.<br><br>The challenge was keeping the two structures in sync without O(n) lookups on eviction. Getting that wrong is easy; debugging it when it goes wrong is educational.</div>
+          <div class="proj-learned">
+            <div class="proj-learned-label">What I learned</div>
+            <p>Pointer management matters enormously. A single incorrect reference in the doubly linked list produces bugs that are silent until they're catastrophic. Building this made LeetCode-style DS questions feel genuinely answerable rather than academic.</p>
+          </div>
           <div class="tags"><span class="tag">Python</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span></div>
         </div>
         <div class="proj-year">2025</div>
@@ -311,9 +395,13 @@
       <div class="proj-entry reveal">
         <div class="proj-entry-left">
           <div class="proj-num">03</div>
-          <div class="proj-title">Allegra the Barman <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">CPU scheduling simulator implementing FCFS, SJF, Priority, and MLFQ. Includes real experimental data collection and performance comparison across scheduling strategies.</div>
-          <div class="tags"><span class="tag">C</span><span class="tag">OS</span><span class="tag">Scheduling</span><span class="tag">Systems</span></div>
+          <div class="proj-title">Allegra the Barman — CPU Scheduler <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">CPU scheduling simulator implementing FCFS, SJF, Priority, and MLFQ. Includes real experimental data collection and performance comparison across scheduling strategies. The name comes from the analogy of a bartender deciding which order to serve next.<br><br>Writing MLFQ was the steepest part — the queue demotion logic had to handle starvation prevention, boosting, and priority aging simultaneously, all in C with manual memory management.</div>
+          <div class="proj-learned">
+            <div class="proj-learned-label">What I learned</div>
+            <p>OS concepts only become real when you implement them. MLFQ looks elegant in a textbook. In C, it's a reminder that every design decision has a cost — and that concurrency and shared state are genuinely hard to reason about.</p>
+          </div>
+          <div class="tags"><span class="tag">C</span><span class="tag">OS</span><span class="tag">Scheduling</span><span class="tag">Systems</span><span class="tag">MLFQ</span></div>
         </div>
         <div class="proj-year">2025</div>
       </div>
@@ -322,8 +410,12 @@
         <div class="proj-entry-left">
           <div class="proj-num">04</div>
           <div class="proj-title">AI Marking System <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">AI-assisted tool to help teachers mark student submissions faster. Sponsored semester project, built in a team of 5 under Mr Charles Mayosi at UCT. Full story on the Business page.</div>
-          <div class="tags"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span></div>
+          <div class="proj-body">AI-assisted tool to help teachers mark student submissions faster. Sponsored semester project at UCT, built in a team of 5 under Mr Charles Mayosi. The system flags, categorises, and drafts feedback on submissions — cutting time spent per script without removing the human from the loop.<br><br>The challenge was making AI feedback feel useful rather than generic. A response that says "good job" isn't help — we had to build prompts and rubric-aware logic that generated feedback a teacher would actually trust.</div>
+          <div class="proj-learned">
+            <div class="proj-learned-label">What I learned</div>
+            <p>The hardest part of AI-assisted tools isn't the AI — it's the interface between the AI output and the human using it. Trust is built slowly. We iterated on feedback phrasing more than we iterated on the model itself. Full story on the Business page.</p>
+          </div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Team of 5</span></div>
         </div>
         <div class="proj-year">2025</div>
       </div>
@@ -332,7 +424,11 @@
         <div class="proj-entry-left">
           <div class="proj-num">05</div>
           <div class="proj-title">Minimal Calculator <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">A clean, distraction-free calculator app. Sometimes the constraint of doing something simple really well teaches you more than a complex project.</div>
+          <div class="proj-body">A clean, distraction-free calculator app. Constraint: no frameworks, no libraries, no build step. Just HTML, CSS, and vanilla JS.<br><br>Sometimes doing something simple really well teaches you more than a complex project. Keyboard accessibility and floating-point edge cases were the parts that actually took time.</div>
+          <div class="proj-learned">
+            <div class="proj-learned-label">What I learned</div>
+            <p>0.1 + 0.2 ≠ 0.3 in most languages. Handling that correctly — without making the UI feel broken — taught me more about IEEE 754 floating-point than any lecture did.</p>
+          </div>
           <div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">UI</span></div>
         </div>
         <div class="proj-year">2024</div>
@@ -369,15 +465,15 @@
 </div>
 
 <!-- ════════════════ PAGE BUSINESS ════════════════ -->
+
 <div id="page-biz" class="page">
   <div class="hero">
-    <div class="saturn"></div>
     <div class="hero-content">
       <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem">Business Computing</p>
       <h1 class="biz-h1">Software that understands<br>the <em>business</em> it lives in.</h1>
       <p class="hero-lead">
         I study both CS and Business Computing at UCT. That means I think about <strong>why</strong> software
-        gets built, not just how. The South African digital economy is where I apply that lens most.
+        gets built, not just how. I've delivered real work in real teams — with real stakeholders watching. The South African digital economy is where I apply that lens most.
       </p>
       <div class="btn-row">
         <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Get in touch</a>
@@ -392,16 +488,23 @@
       <div class="spotlight-title">AI-Assisted Marking System</div>
       <div class="spotlight-grid">
         <div class="spotlight-body">
-          <p>Teachers spend hours marking the same types of student responses. This tool uses AI to flag, categorise, and draft feedback on submissions — cutting the time spent per script without removing the human in the loop.</p>
+          <p>Teachers spend hours marking the same types of student responses. This tool uses AI to flag, categorise, and draft feedback on submissions — cutting time per script without removing the human in the loop.</p>
           <p>The mission was simple: <strong>give teachers their evenings back.</strong></p>
-          <p>Built under the sponsorship of <strong>Mr Charles Mayosi</strong> at UCT, the project gave us a real brief, real accountability, and a real stakeholder to present to — not just a tutorial exercise.</p>
-          <div class="tags" style="margin-top:1rem"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span></div>
+          <p>Built under the sponsorship of <strong>Mr Charles Mayosi</strong> at UCT, the project gave us a real brief, real accountability, and a real stakeholder to present to — not just a tutorial exercise. We had to manage scope, shifting requirements, and five people with different strengths who all needed to contribute meaningfully.</p>
+
+          <div class="team-block" style="margin-top:1.25rem">
+            <div class="team-block-label">On working in a team</div>
+            <p>Five people building one thing sounds simple. It isn't. We had different strengths, different working rhythms, and one deadline. What held it together was <strong>clear ownership</strong> — every component had a name behind it — and the discipline to communicate when something wasn't working rather than quietly working around each other. The best thing a team can do is make disagreement safe. We got better at that as the semester went on.</p>
+          </div>
+
+          <div class="tags" style="margin-top:1rem"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Agile</span><span class="tag">Team of 5</span></div>
         </div>
         <div class="spotlight-meta">
           <div class="meta-block"><div class="meta-label">Sponsor</div><div class="meta-val">Mr Charles Mayosi, UCT</div></div>
           <div class="meta-block"><div class="meta-label">Team</div><div class="meta-val">5 people — cross-functional, mixed backgrounds</div></div>
           <div class="meta-block"><div class="meta-label">Mission</div><div class="meta-val">Reduce time teachers spend marking using AI assistance</div></div>
-          <div class="meta-block"><div class="meta-label">Outcome</div><div class="meta-val">Working prototype generating draft feedback and flagging submissions for review</div></div>
+          <div class="meta-block"><div class="meta-label">Outcome</div><div class="meta-val">Working prototype generating rubric-aware draft feedback and flagging submissions for teacher review</div></div>
+          <div class="meta-block"><div class="meta-label">Key challenge</div><div class="meta-val">Building AI feedback that teachers would actually trust — generic responses aren't useful, so we iterated on phrasing more than on the model</div></div>
         </div>
       </div>
     </div>
@@ -447,9 +550,10 @@
     <div class="eyebrow reveal">Journey</div>
     <h2 class="reveal">Where I've been.</h2>
     <div class="timeline">
-      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Started tutoring CSC1015F</h3><p>Selected as a first-year CS tutor at UCT. Renewed for a second year.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>AI Marking System — first sponsored project</h3><p>Worked in a team of 5 under Mr Charles Mayosi. First time delivering against a real brief with a real stakeholder.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>CutList Optimiser — reverse-engineering a commercial tool</h3><p>Set out to understand how optimisation software like MaxCut works by building my own from scratch.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Started tutoring CSC1015F at UCT</h3><p>Selected as a first-year CS tutor. Renewed for a second year. Teaching forces you to close every gap in your own understanding.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Leo Library — reading tutor</h3><p>Worked with young readers in Johannesburg to build literacy skills. Technology only matters if people can access it — that starts long before anyone opens a laptop.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>AI Marking System — first sponsored project</h3><p>Worked in a team of 5 under Mr Charles Mayosi. First time delivering against a real brief with a real stakeholder. Learned what it means to manage scope when the scope keeps moving.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>CutList Optimiser — reverse-engineering a commercial tool</h3><p>Set out to understand how optimisation software like MaxCut works by building my own from scratch. The best way to understand something is to build it yourself.</p></div></div>
       <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>Final year — completing BSc CS & Business Computing</h3><p>Targeting my first role out of UCT. Ready for a position where both sides of my degree get used.</p></div></div>
     </div>
   </div>
@@ -468,14 +572,14 @@
 </div>
 
 <!-- ════════════════ PAGE ME ════════════════ -->
+
 <div id="page-me" class="page">
   <div class="hero">
     <div class="hero-content">
       <p style="font-family:var(--font-body);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem;font-weight:300;letter-spacing:0.05em">just me</p>
-      <h1 class="me-h1">Not everything<br>fits on a CV.</h1>
+      <h1 class="me-h1">I wanted to<br>change the world.</h1>
       <p class="hero-lead" style="font-weight:300">
-        Third-year CS student from Johannesburg. I've tried probably every flavour of programming
-        at least once — if it involves code, I've poked at it. This is the page where I get to just be a person.
+        Still do. That's the thread that runs through all of it — the tinkering, the code, the anime at midnight, the family dinner table. This page is the story behind the CV.
       </p>
       <div class="btn-row">
         <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Say hi</a>
@@ -484,26 +588,128 @@
   </div>
 
   <div class="section">
-    <div class="eyebrow reveal">Interests</div>
-    <h2 class="reveal">Outside the IDE.</h2>
+    <div class="eyebrow reveal">Origin story</div>
+    <h2 class="reveal">How I got here.</h2>
+    <div class="origin-flow">
+
+      <div class="origin-beat reveal">
+        <div class="origin-era">The Spark<span>Early curiosity</span></div>
+        <div class="origin-text">
+          <p>It started with wanting to <strong>invent things</strong>. Not software specifically — just the feeling that things could be different, better, built differently. The idea that one person with the right tools and enough stubbornness could change something real.</p>
+          <p>I didn't have the vocabulary for it yet. But the aspiration was there long before the laptop was.</p>
+        </div>
+      </div>
+
+      <div class="origin-beat reveal">
+        <div class="origin-era">Arduino Era<span>First hardware steps</span></div>
+        <div class="origin-text">
+          <p>My entry point into building things was <strong>Arduino</strong>. Microcontrollers. Hardware that blinked, buzzed, read sensors, and sometimes just refused to work for reasons I couldn't explain at 1am.</p>
+          <p>I'd research components online and ask my parents to help me buy them — resistors, LEDs, ultrasonic sensors, motor drivers. They didn't always know what any of it was for. They bought it anyway. That meant something.</p>
+          <p>Arduino taught me that the gap between an idea and a working thing is <strong>mostly friction, not impossibility</strong>. You just have to be stubborn enough to sit with the friction.</p>
+        </div>
+      </div>
+
+      <div class="origin-beat reveal">
+        <div class="origin-era">Gaming<span>Systems thinking in disguise</span></div>
+        <div class="origin-text">
+          <p>I've always gamed. But somewhere along the way I stopped just playing and started <strong>watching how games were built</strong> — the economy systems, the AI decision-making, the way level design nudges you without telling you. Games are some of the most complex interactive systems ever made, and they're designed to feel effortless. That's not an accident.</p>
+          <p>Gaming gave me a way to think about systems, feedback loops, and user experience long before I had names for any of those things.</p>
+        </div>
+      </div>
+
+      <div class="origin-beat reveal">
+        <div class="origin-era">CompSci at UCT<span>The umbrella opened</span></div>
+        <div class="origin-text">
+          <p>When I got into Computer Science at UCT, it felt like the Arduino experiments and the gaming and the vague want-to-invent-things suddenly had a formal home. CS is the umbrella that covers all of it — algorithms, systems, AI, hardware, software, the web, security. I enrolled wanting to explore everything under it.</p>
+          <p>Adding Business Computing wasn't an afterthought. Software built without understanding the world it enters is incomplete. I wanted <strong>both sides</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">What anime taught me</div>
+    <h2 class="reveal">Lessons from the shows I've watched.</h2>
+    <p class="reveal" style="font-size:0.88rem;color:var(--fgm);line-height:1.85;margin-top:0.5rem;max-width:600px">Yes, genuinely. No apologies. The best anime doesn't just entertain — it teaches you things about persistence and belief that are harder to say out loud.</p>
+    <div class="anime-lessons">
+
+      <div class="anime-lesson reveal">
+        <div class="anime-lesson-num">—</div>
+        <div>
+          <h4>You don't quit when it gets hard. You quit when you stop caring.</h4>
+          <p>Every shonen protagonist loses. Badly, repeatedly, and publicly. The lesson isn't that they always win — it's that they get back up every single time. That's the whole point. I've taken that seriously. When a bug takes three days, when a project isn't going well, when I don't understand something — I don't quit. I adjust and continue.</p>
+        </div>
+      </div>
+
+      <div class="anime-lesson reveal">
+        <div class="anime-lesson-num">—</div>
+        <div>
+          <h4>It takes just one person believing in you to know that you can.</h4>
+          <p>Self-belief matters. But there's something that lands differently when someone else sees what you're capable of before you fully see it yourself. A mentor, a parent, a teacher who picks you for something — that moment of external belief can unlock something internal that couldn't get there alone. I know this because it happened to me. My family has always been that person.</p>
+        </div>
+      </div>
+
+      <div class="anime-lesson reveal">
+        <div class="anime-lesson-num">—</div>
+        <div>
+          <h4>The strongest people carry others, not just themselves.</h4>
+          <p>The characters I respect most in the shows I watch aren't the most individually powerful — they're the ones who bring others with them. Being good at something is the floor. Using it to lift the people around you is the ceiling. That's what tutoring is. That's what the Leo Library was. That's the kind of engineer I want to be.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">What drives me</div>
+    <h2 class="reveal">Interests outside the IDE.</h2>
     <div class="editorial">
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>⛩</strong>Anime</div>
-        <div class="editorial-content"><p>Yes, genuinely. It's where I go when I need my brain to stop thinking about systems design for five minutes. No apologies.</p></div>
+        <div class="editorial-content"><p>Where I go when I need my brain to stop thinking about systems design for five minutes. Also where I've picked up some of my most durable beliefs about resilience and purpose. No apologies on either count.</p></div>
       </div>
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>🎮</strong>Gaming</div>
-        <div class="editorial-content"><p>Not just a hobby — games are some of the most complex interactive systems ever built. I pay attention to how they're designed, not just how they play.</p></div>
+        <div class="editorial-content"><p>Not just a hobby — games are some of the most complex interactive systems ever built. I pay attention to how they're designed, not just how they play. Economy systems, AI behaviour, difficulty curves that feel fair. All of it is systems thinking with a controller in your hand.</p></div>
       </div>
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>🔌</strong>Arduino & Hardware</div>
-        <div class="editorial-content"><p>When software isn't enough. Microcontrollers are how I end up at 1am wondering why a sensor won't read properly. I like problems that fight back.</p></div>
+        <div class="editorial-content"><p>Where it all started. Microcontrollers are how I end up at 1am wondering why a sensor won't read properly. I like problems that fight back — and hardware fights back in ways that software doesn't. You can't mock a broken circuit.</p></div>
       </div>
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>🌍</strong>African Tech</div>
-        <div class="editorial-content"><p>Building software differently when your context is South Africa — not Silicon Valley. The constraints are different. The problems are different. That's more interesting, not less.</p></div>
+        <div class="editorial-content"><p>Building software differently when your context is South Africa — not Silicon Valley. Load-shedding, data costs, connectivity gaps. These aren't edge cases. They're the brief. Working within them makes you a better engineer, not a limited one.</p></div>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow reveal">Values</div>
+    <h2 class="reveal">What I'm built on.</h2>
+    <div class="values-grid reveal">
+      <div class="value-cell">
+        <div class="value-icon">✝</div>
+        <div class="value-name">God</div>
+        <div class="value-sub">The foundation. Everything starts here.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-icon">🏠</div>
+        <div class="value-name">Family</div>
+        <div class="value-sub">The people who believed before I did. The reason I keep going.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-icon">🪞</div>
+        <div class="value-name">Myself</div>
+        <div class="value-sub">Knowing who I am. Staying honest about where I need to grow.</div>
+      </div>
+      <div class="value-cell">
+        <div class="value-icon">{ }</div>
+        <div class="value-name">Code</div>
+        <div class="value-sub">The craft. The tool. The way I try to make things better.</div>
+      </div>
+    </div>
+    <p class="reveal" style="font-size:0.84rem;color:var(--fgm);line-height:1.85;margin-top:1.5rem;max-width:580px">My family bought Arduino parts they didn't understand so I could build things I barely understood. They came to demo days. They asked questions about my projects. They told me I was capable of this when I wasn't sure. That kind of faith isn't nothing — it's everything. Whatever I build, I build for them too.</p>
   </div>
 
   <div class="section">
@@ -524,6 +730,7 @@
       <span class="tried-pill reveal">CLI tools</span>
       <span class="tried-pill reveal">PDF generation</span>
       <span class="tried-pill reveal">Data visualisation</span>
+      <span class="tried-pill reveal">Microcontrollers</span>
     </div>
   </div>
 
@@ -567,8 +774,8 @@
 <script>
 // ── CANVAS: CS — particle network ──────────────────────────
 (function(){
-  const c = document.getElementById('canvas-cs');
-  const ctx = c.getContext('2d');
+  const c=document.getElementById('canvas-cs');
+  const ctx=c.getContext('2d');
   let W,H,pts=[];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
   resize();window.addEventListener('resize',()=>{resize();init()});
@@ -604,75 +811,102 @@
 })();
 
 // ── CANVAS: BIZ — drifting geometric shapes ────────────────
-  const canvas = document.getElementById("canvas-biz");
-  const ctx = canvas.getContext("2d");
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let angle = 0;
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const cx = canvas.width * 0.7;
-    const cy = canvas.height * 0.5;
-
-    // planet
-    ctx.beginPath();
-    ctx.arc(cx, cy, 60, 0, Math.PI * 2);
-    ctx.fillStyle = "#c89b5a";
-    ctx.fill();
-
-    // ring
-    ctx.beginPath();
-    ctx.ellipse(cx, cy, 100, 30, Math.PI / 6, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(200,155,90,0.5)";
-    ctx.stroke();
-
-    // orbiting particle
-    const x = cx + Math.cos(angle) * 120;
-    const y = cy + Math.sin(angle) * 40;
-
-    ctx.beginPath();
-    ctx.arc(x, y, 3, 0, Math.PI * 2);
-    ctx.fillStyle = "#f4d8a8";
-    ctx.fill();
-
-    angle += 0.01;
-
+(function(){
+  const canvas=document.getElementById('canvas-biz');
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
+  let angle=0;
+  // Multiple orbiting nodes to suggest a team / network
+  const nodes=[
+    {dist:110,speed:0.007,phase:0,r:5,color:'rgba(160,105,42,0.7)'},
+    {dist:145,speed:0.005,phase:1.2,r:4,color:'rgba(160,105,42,0.5)'},
+    {dist:80,speed:0.011,phase:2.4,r:3,color:'rgba(160,105,42,0.6)'},
+    {dist:165,speed:0.004,phase:3.6,r:6,color:'rgba(200,160,100,0.4)'},
+    {dist:95,speed:0.009,phase:4.8,r:3.5,color:'rgba(160,105,42,0.55)'},
+  ];
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const cx=canvas.width*0.68;
+    const cy=canvas.height*0.45;
+    angle+=0.005;
+    // draw connection lines between nodes
+    const positions=nodes.map(n=>({
+      x:cx+Math.cos(angle*n.speed/0.005+n.phase)*n.dist,
+      y:cy+Math.sin(angle*n.speed/0.005+n.phase)*(n.dist*0.38)
+    }));
+    for(let i=0;i<positions.length;i++){
+      for(let j=i+1;j<positions.length;j++){
+        const d=Math.hypot(positions[i].x-positions[j].x,positions[i].y-positions[j].y);
+        if(d<180){
+          ctx.beginPath();ctx.moveTo(positions[i].x,positions[i].y);ctx.lineTo(positions[j].x,positions[j].y);
+          ctx.strokeStyle=`rgba(160,105,42,${0.12*(1-d/180)})`;ctx.lineWidth=1;ctx.stroke();
+        }
+      }
+    }
+    // central hub
+    ctx.beginPath();ctx.arc(cx,cy,28,0,Math.PI*2);
+    ctx.fillStyle='rgba(160,105,42,0.18)';ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);
+    ctx.fillStyle='rgba(160,105,42,0.35)';ctx.fill();
+    // outer ring
+    ctx.beginPath();ctx.ellipse(cx,cy,130,50,Math.PI/8,0,Math.PI*2);
+    ctx.strokeStyle='rgba(160,105,42,0.08)';ctx.lineWidth=1;ctx.stroke();
+    // nodes
+    nodes.forEach((n,i)=>{
+      ctx.beginPath();ctx.arc(positions[i].x,positions[i].y,n.r,0,Math.PI*2);
+      ctx.fillStyle=n.color;ctx.fill();
+    });
     requestAnimationFrame(draw);
   }
-
   draw();
+})();
 
-
-// ── CANVAS: ME — soft morphing blobs ──────────────────────
+// ── CANVAS: ME — anime-inspired energy lines + soft orbs ──
 (function(){
   const c=document.getElementById('canvas-me');
   const ctx=c.getContext('2d');
   let W,H,t=0;
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
   resize();window.addEventListener('resize',resize);
-  const blobs=[
-    {bx:0.25,by:0.3,r:0.22,spd:0.0008,phase:0},
-    {bx:0.75,by:0.2,r:0.18,spd:0.0012,phase:2.1},
-    {bx:0.5,by:0.7,r:0.25,spd:0.0006,phase:4.2},
-    {bx:0.15,by:0.75,r:0.14,spd:0.001,phase:1.0},
-    {bx:0.85,by:0.65,r:0.16,spd:0.0009,phase:3.5},
+  const orbs=[
+    {bx:0.2,by:0.25,r:0.2,spd:0.0007,phase:0},
+    {bx:0.78,by:0.18,r:0.16,spd:0.001,phase:2.0},
+    {bx:0.5,by:0.72,r:0.22,spd:0.0005,phase:4.1},
+    {bx:0.12,by:0.72,r:0.13,spd:0.0009,phase:0.8},
+    {bx:0.88,by:0.62,r:0.15,spd:0.0008,phase:3.3},
   ];
+  // floating particles for energy feel
+  const sparks=Array.from({length:28},()=>({
+    x:Math.random(),y:Math.random(),
+    vx:(Math.random()-0.5)*0.0002,
+    vy:(Math.random()-0.5)*0.0002,
+    size:Math.random()*1.5+0.5,
+    opacity:Math.random()*0.5+0.2,
+  }));
   function draw(){
     ctx.clearRect(0,0,W,H);
     t++;
-    blobs.forEach(b=>{
-      const x=W*(b.bx+Math.sin(t*b.spd+b.phase)*0.06);
+    orbs.forEach(b=>{
+      const x=W*(b.bx+Math.sin(t*b.spd+b.phase)*0.07);
       const y=H*(b.by+Math.cos(t*b.spd*1.3+b.phase)*0.05);
       const r=Math.min(W,H)*b.r;
       const g=ctx.createRadialGradient(x,y,0,x,y,r);
-      g.addColorStop(0,'rgba(107,72,184,0.13)');
-      g.addColorStop(1,'rgba(107,72,184,0)');
+      g.addColorStop(0,'rgba(167,139,250,0.14)');
+      g.addColorStop(0.5,'rgba(139,92,246,0.06)');
+      g.addColorStop(1,'rgba(139,92,246,0)');
       ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
       ctx.fillStyle=g;ctx.fill();
+    });
+    // sparks
+    sparks.forEach(s=>{
+      s.x+=s.vx;s.y+=s.vy;
+      if(s.x<0)s.x=1;if(s.x>1)s.x=0;
+      if(s.y<0)s.y=1;if(s.y>1)s.y=0;
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.size,0,Math.PI*2);
+      ctx.fillStyle=`rgba(167,139,250,${s.opacity*(0.7+0.3*Math.sin(t*0.02+s.x*10))})`;
+      ctx.fill();
     });
     requestAnimationFrame(draw);
   }
@@ -734,4 +968,3 @@ triggerReveal();
 </script>
 </body>
 </html>
-
