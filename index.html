@@ -10,7 +10,6 @@
     html{scroll-behavior:smooth}
     body{font-size:16px;line-height:1.6;min-height:100vh;transition:background 0.5s,color 0.5s}
 
-/* ── TOKENS ── */
 :root{
   --bg:#0C0C0E;--bg2:#121216;--fg:#F0F0EE;--fgm:#777;--border:#1E1E26;
   --accent:#00E5C4;--accent-dim:rgba(0,229,196,0.1);
@@ -33,7 +32,6 @@ body.theme-me{
 body{background:var(--bg);color:var(--fg);font-family:var(--font-body)}
 a{color:var(--accent);text-decoration:none}
 
-/* ── NAV ── */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:300;
   display:flex;align-items:center;justify-content:space-between;
@@ -54,12 +52,10 @@ a{color:var(--accent);text-decoration:none}
 .nav-tab:hover{color:var(--fg);border-color:var(--border)}
 .nav-tab.active{background:var(--accent);color:var(--bg);border-color:transparent}
 
-/* ── PAGES ── */
 .page{display:none}
 .page.active{display:block;animation:fadein 0.5s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-/* ── HERO SHELL ── */
 .hero{
   position:relative;min-height:100vh;display:flex;flex-direction:column;
   justify-content:center;padding:5rem 2.5rem 3rem;max-width:900px;margin:0 auto;
@@ -72,7 +68,6 @@ a{color:var(--accent);text-decoration:none}
 .hero-canvas.active{opacity:1}
 .hero-content{position:relative;z-index:2}
 
-/* CS HERO TEXT */
 .cs-pre{font-family:var(--font-mono);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem}
 .cs-pre span{color:var(--accent)}
 .tw-wrap{
@@ -94,12 +89,10 @@ a{color:var(--accent);text-decoration:none}
 .hero-lead{max-width:500px;color:var(--fgm);font-size:0.92rem;line-height:1.85;margin-bottom:2.5rem}
 .hero-lead strong{color:var(--fg);font-weight:500}
 
-/* BIZ HERO TEXT */
 .biz-h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:600;line-height:1.1;margin-bottom:1.25rem}
 .biz-h1 em{color:var(--accent);font-style:italic}
 .me-h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:400;line-height:1.15;margin-bottom:1.25rem;letter-spacing:-0.02em}
 
-/* BUTTONS */
 .btn-row{display:flex;gap:0.7rem;flex-wrap:wrap}
 .btn{
   display:inline-flex;align-items:center;gap:0.4rem;padding:0.62rem 1.25rem;
@@ -111,7 +104,6 @@ a{color:var(--accent);text-decoration:none}
 .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 
-/* ── SECTIONS ── */
 .section{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
 .eyebrow{
   font-family:var(--font-mono);font-size:0.68rem;font-weight:400;letter-spacing:0.14em;
@@ -121,7 +113,6 @@ a{color:var(--accent);text-decoration:none}
 .eyebrow::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
 h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
 
-/* ── EDITORIAL TEXT SECTIONS ── */
 .editorial{margin-top:2rem}
 .editorial-block{
   display:grid;grid-template-columns:160px 1fr;gap:2rem;
@@ -137,7 +128,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .editorial-content p{font-size:0.88rem;color:var(--fgm);line-height:1.8}
 .editorial-content p+p{margin-top:0.6rem}
 
-/* ── PROJECT LIST ── */
 .proj-list{margin-top:2rem;display:flex;flex-direction:column;gap:0}
 .proj-entry{
   display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;
@@ -149,7 +139,7 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .proj-title{
   font-family:var(--font-display);font-size:1.05rem;font-weight:600;
   margin-bottom:0.5rem;color:var(--fg);
-  display:inline-flex;align-items:center;gap:0.5rem;
+  display:inline-flex;align-items:center;gap:0.5rem;transition:color 0.2s;
 }
 .proj-arrow{
   opacity:0;transform:translateX(-4px);transition:opacity 0.2s,transform 0.2s;
@@ -157,7 +147,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 }
 .proj-entry:hover .proj-arrow{opacity:1;transform:none}
 .proj-entry:hover .proj-title{color:var(--accent)}
-.proj-title{transition:color 0.2s}
 .proj-body{font-size:0.85rem;color:var(--fgm);line-height:1.8;max-width:560px}
 .proj-learned{
   margin-top:0.85rem;padding:0.75rem 1rem;
@@ -173,7 +162,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 }
 .proj-year{font-family:var(--font-mono);font-size:0.72rem;color:var(--fgm);white-space:nowrap;padding-top:4px}
 
-/* ── SKILLS EDITORIAL ── */
 .skills-editorial{margin-top:2rem}
 .skill-row{
   display:grid;grid-template-columns:200px 1fr;gap:2rem;
@@ -183,7 +171,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .skill-category{font-family:var(--font-display);font-size:0.85rem;font-weight:600;color:var(--fg)}
 .skill-items{font-size:0.85rem;color:var(--fgm);line-height:1.8}
 
-/* ── SPOTLIGHT ── */
 .spotlight-wrap{margin-top:2rem;padding:2rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .spotlight-kicker{font-family:var(--font-mono);font-size:0.68rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
 .spotlight-title{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:600;margin-bottom:1.25rem;line-height:1.2}
@@ -192,11 +179,9 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .spotlight-body p+p{margin-top:0.75rem}
 .spotlight-body strong{color:var(--fg);font-weight:500}
 .spotlight-meta{display:flex;flex-direction:column;gap:1.25rem;padding-top:0.25rem}
-.meta-block{}
 .meta-label{font-family:var(--font-mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.3rem}
 .meta-val{font-size:0.85rem;color:var(--fgm);line-height:1.6}
 
-/* ── TEAMWORK HIGHLIGHT ── */
 .team-block{
   margin-top:1.5rem;padding:1.5rem;
   border:1px solid var(--border);border-radius:var(--r);
@@ -206,14 +191,12 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .team-block p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
 .team-block strong{color:var(--fg);font-weight:500}
 
-/* ── TAKES / OPINIONS ── */
 .takes{margin-top:2rem}
 .take{padding:1.75rem 0;border-top:1px solid var(--border)}
 .take:last-child{border-bottom:1px solid var(--border)}
 .take-label{font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.6rem}
 .take-text{font-size:0.92rem;color:var(--fg);line-height:1.85;max-width:640px}
 
-/* ── TRIED SECTION ── */
 .tried-flow{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
 .tried-pill{
   font-size:0.8rem;color:var(--fgm);padding:0.35rem 0.85rem;
@@ -222,7 +205,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 }
 .tried-pill:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ── TIMELINE ── */
 .timeline{margin-top:2rem}
 .tl-row{display:grid;grid-template-columns:80px 1fr;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--border)}
 .tl-row:last-child{border-bottom:1px solid var(--border)}
@@ -230,7 +212,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .tl-content h3{font-family:var(--font-display);font-size:0.95rem;font-weight:600;margin-bottom:0.3rem}
 .tl-content p{font-size:0.85rem;color:var(--fgm);line-height:1.75}
 
-/* ── VALUES GRID (Me page) ── */
 .values-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
   margin-top:2rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
@@ -244,22 +225,18 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .value-icon{font-size:1.5rem;line-height:1}
 .value-name{font-family:var(--font-display);font-size:0.95rem;font-weight:700;color:var(--fg)}
 .value-sub{font-size:0.75rem;color:var(--fgm);line-height:1.6}
+@media(max-width:640px){.value-icon{font-size:2rem}.value-cell{padding:1.5rem 1rem}}
 
-/* ── ANIME LESSON ── */
 .anime-lessons{margin-top:2rem}
 .anime-lesson{
   padding:1.5rem 0;border-top:1px solid var(--border);
   display:grid;grid-template-columns:28px 1fr;gap:1rem;align-items:start;
 }
 .anime-lesson:last-child{border-bottom:1px solid var(--border)}
-.anime-lesson-num{
-  font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);
-  padding-top:3px;
-}
+.anime-lesson-num{font-family:var(--font-mono);font-size:0.65rem;color:var(--accent);padding-top:3px}
 .anime-lesson h4{font-family:var(--font-display);font-size:0.9rem;font-weight:600;margin-bottom:0.35rem;color:var(--fg)}
 .anime-lesson p{font-size:0.84rem;color:var(--fgm);line-height:1.8}
 
-/* ── ORIGIN STORY ── */
 .origin-flow{margin-top:2rem}
 .origin-beat{
   display:grid;grid-template-columns:120px 1fr;gap:2rem;
@@ -275,7 +252,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 .origin-text p+p{margin-top:0.6rem}
 .origin-text strong{color:var(--fg);font-weight:500}
 
-/* ── CONTACT ── */
 .contact-wrap{padding:5rem 2.5rem;max-width:900px;margin:0 auto}
 .contact-inner{padding:3rem 0;border-top:1px solid var(--border)}
 .contact-inner h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-spacing:-0.03em;margin-bottom:0.5rem}
@@ -290,7 +266,6 @@ h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.4rem);letter-s
 
 footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75rem;color:var(--fgm);display:flex;justify-content:space-between}
 
-/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
 .reveal.vis{opacity:1;transform:none}
 
@@ -334,11 +309,10 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <span class="cursor"></span>
       </div>
       <p class="hero-lead">
-        I build <strong>systems that solve real problems</strong>. From cloud optimisation backends
-        on GCP to CPU scheduling simulators — software that actually works, not just compiles.
+        I build <strong>systems that solve real problems</strong>. From cloud optimisation backends on GCP to CPU scheduling simulators. The goal is always software that actually works, not just compiles.
       </p>
       <div class="btn-row">
-        <a href="https://github.com/gomolemo-modisane" target="_blank" class="btn btn-solid">GitHub ↗</a>
+        <a href="https://github.com/gmodisane" target="_blank" class="btn btn-solid">GitHub ↗</a>
         <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-ghost">Email me</a>
       </div>
     </div>
@@ -349,12 +323,12 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <h2 class="reveal">Where I've put it to use.</h2>
     <div class="skills-editorial">
       <div class="skill-row reveal">
-        <div class="skill-category">CS Tutor — UCT<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">CSC1015F · 2024–2025</span></div>
-        <div class="skill-items">Selected as a first-year CS tutor at UCT and renewed for a second year. Helping students understand programming fundamentals — and realising that explaining something clearly is often the deepest test of whether you actually know it.</div>
+        <div class="skill-category">CS Tutor · UCT<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">CSC1015F &amp; 1016F · 2025–present</span></div>
+        <div class="skill-items">Selected as a CS tutor at UCT in 2025. Tutored CSC1015F in first semester, moved to CSC1016F in second semester, and returned to CSC1015F in the first semester of 2026. Three semesters, two courses. Explaining something clearly is often the deepest test of whether you actually know it.</div>
       </div>
       <div class="skill-row reveal">
-        <div class="skill-category">Reading Tutor — Leo Library<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">Community · Johannesburg</span></div>
-        <div class="skill-items">Volunteered as a reading tutor at the Leo Library, working with young readers to build literacy skills. A reminder that technology only matters if the people who need it most can access it — and that access starts with reading.</div>
+        <div class="skill-category">Librarian · Leo Marquard Hall<br><span style="font-size:0.72rem;font-weight:400;color:var(--fgm)">UCT Residence · 2025 · Cape Town</span></div>
+        <div class="skill-items">Responsible for opening and closing the residential library at Leo Marquard Hall. Helped students upload printing credits, use library computers, and navigate resources. Allocated and tracked all books borrowed during my shifts. The role taught me that access to information is a logistics problem as much as anything else, and that small systems matter when people depend on them.</div>
       </div>
     </div>
   </div>
@@ -368,21 +342,21 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <div class="proj-entry-left">
           <div class="proj-num">01</div>
           <div class="proj-title">CutList Optimiser <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">MaxCut is a well-known commercial cutting optimisation tool. I wanted to understand how something like it works — so I built my own from scratch. A bin-packing solver that takes panel dimensions and computes optimal cut layouts to minimise waste, with printable PDF output.<br><br>The hard part wasn't the algorithm — it was the constraint that real wood panels have grain direction, saw blade kerf, and minimum offcut sizes. The solver needed to model the physical reality, not just the maths.</div>
+          <div class="proj-body">MaxCut is a well-known commercial cutting optimisation tool. I wanted to understand how something like it works, so I built my own from scratch. A bin-packing solver that takes panel dimensions and computes optimal cut layouts to minimise waste, with printable PDF output.<br><br>The hard part wasn't the algorithm. It was the constraint that real wood panels have grain direction, saw blade kerf, and minimum offcut sizes. The solver needed to model the physical reality, not just the maths.</div>
           <div class="proj-learned">
             <div class="proj-learned-label">What I learned</div>
-            <p>Optimisation problems look simple on paper. Translating physical constraints (kerf width, grain direction, minimum usable offcuts) into solver constraints is where most of the real work lives. OR-Tools is powerful but unforgiving — it will find the edge cases in your model.</p>
+            <p>Optimisation problems look simple on paper. Translating physical constraints like kerf width, grain direction, and minimum usable offcuts into solver constraints is where most of the real work lives. OR-Tools is powerful but unforgiving. It will find every edge case in your model.</p>
           </div>
           <div class="tags"><span class="tag">Python</span><span class="tag">Bin Packing</span><span class="tag">OR-Tools</span><span class="tag">PDF Generation</span><span class="tag">Algorithms</span></div>
         </div>
-        <div class="proj-year">2025</div>
+        <div class="proj-year">2026</div>
       </div>
 
       <div class="proj-entry reveal">
         <div class="proj-entry-left">
           <div class="proj-num">02</div>
           <div class="proj-title">LRU Cache <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">Least Recently Used cache built from scratch — a doubly linked list and hashmap combined to hit O(1) get and put. A deliberate deep-dive into data structures rather than reaching for a library.<br><br>The challenge was keeping the two structures in sync without O(n) lookups on eviction. Getting that wrong is easy; debugging it when it goes wrong is educational.</div>
+          <div class="proj-body">Least Recently Used cache built from scratch. A doubly linked list and hashmap combined to hit O(1) get and put. A deliberate deep-dive into data structures rather than reaching for a library.<br><br>The challenge was keeping the two structures in sync without O(n) lookups on eviction. Getting that wrong is easy; debugging it when it goes wrong is educational.</div>
           <div class="proj-learned">
             <div class="proj-learned-label">What I learned</div>
             <p>Pointer management matters enormously. A single incorrect reference in the doubly linked list produces bugs that are silent until they're catastrophic. Building this made LeetCode-style DS questions feel genuinely answerable rather than academic.</p>
@@ -395,11 +369,11 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <div class="proj-entry reveal">
         <div class="proj-entry-left">
           <div class="proj-num">03</div>
-          <div class="proj-title">Allegra the Barman — CPU Scheduler <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">CPU scheduling simulator implementing FCFS, SJF, Priority, and MLFQ. Includes real experimental data collection and performance comparison across scheduling strategies. The name comes from the analogy of a bartender deciding which order to serve next.<br><br>Writing MLFQ was the steepest part — the queue demotion logic had to handle starvation prevention, boosting, and priority aging simultaneously, all in C with manual memory management.</div>
+          <div class="proj-title">Allegra the Barman · CPU Scheduler <span class="proj-arrow">↗</span></div>
+          <div class="proj-body">CPU scheduling simulator implementing FCFS, SJF, Priority, and MLFQ. Includes real experimental data collection and performance comparison across scheduling strategies. The name comes from the analogy of a bartender deciding which order to serve next.<br><br>Writing MLFQ was the steepest part. The queue demotion logic had to handle starvation prevention, boosting, and priority aging simultaneously, all in C with manual memory management.</div>
           <div class="proj-learned">
             <div class="proj-learned-label">What I learned</div>
-            <p>OS concepts only become real when you implement them. MLFQ looks elegant in a textbook. In C, it's a reminder that every design decision has a cost — and that concurrency and shared state are genuinely hard to reason about.</p>
+            <p>OS concepts only become real when you implement them. MLFQ looks elegant in a textbook. In C, it's a reminder that every design decision has a cost, and that concurrency and shared state are genuinely hard to reason about.</p>
           </div>
           <div class="tags"><span class="tag">C</span><span class="tag">OS</span><span class="tag">Scheduling</span><span class="tag">Systems</span><span class="tag">MLFQ</span></div>
         </div>
@@ -410,14 +384,14 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <div class="proj-entry-left">
           <div class="proj-num">04</div>
           <div class="proj-title">AI Marking System <span class="proj-arrow">↗</span></div>
-          <div class="proj-body">AI-assisted tool to help teachers mark student submissions faster. Sponsored semester project at UCT, built in a team of 5 under Mr Charles Mayosi. The system flags, categorises, and drafts feedback on submissions — cutting time spent per script without removing the human from the loop.<br><br>The challenge was making AI feedback feel useful rather than generic. A response that says "good job" isn't help — we had to build prompts and rubric-aware logic that generated feedback a teacher would actually trust.</div>
+          <div class="proj-body">AI-assisted tool to help teachers mark student submissions faster. Sponsored semester project at UCT, built in a team of 5 under Mr Charles Mayosi. The system flags, categorises, and drafts feedback on submissions, cutting time spent per script without removing the human from the loop.<br><br>The challenge was making AI feedback feel useful rather than generic. A response that says "good job" isn't help. We had to build prompts and rubric-aware logic that generated feedback a teacher would actually trust.</div>
           <div class="proj-learned">
             <div class="proj-learned-label">What I learned</div>
-            <p>The hardest part of AI-assisted tools isn't the AI — it's the interface between the AI output and the human using it. Trust is built slowly. We iterated on feedback phrasing more than we iterated on the model itself. Full story on the Business page.</p>
+            <p>The hardest part of AI-assisted tools isn't the AI. It's the interface between the AI output and the human using it. Trust is built slowly. We iterated on feedback phrasing more than we iterated on the model itself. Full story on the Business page.</p>
           </div>
           <div class="tags"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Team of 5</span></div>
         </div>
-        <div class="proj-year">2025</div>
+        <div class="proj-year">2026</div>
       </div>
 
       <div class="proj-entry reveal">
@@ -427,7 +401,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
           <div class="proj-body">A clean, distraction-free calculator app. Constraint: no frameworks, no libraries, no build step. Just HTML, CSS, and vanilla JS.<br><br>Sometimes doing something simple really well teaches you more than a complex project. Keyboard accessibility and floating-point edge cases were the parts that actually took time.</div>
           <div class="proj-learned">
             <div class="proj-learned-label">What I learned</div>
-            <p>0.1 + 0.2 ≠ 0.3 in most languages. Handling that correctly — without making the UI feel broken — taught me more about IEEE 754 floating-point than any lecture did.</p>
+            <p>0.1 + 0.2 does not equal 0.3 in most languages. Handling that correctly without making the UI feel broken taught me more about IEEE 754 floating-point than any lecture did.</p>
           </div>
           <div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">UI</span></div>
         </div>
@@ -442,10 +416,10 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <h2 class="reveal">What I work with.</h2>
     <div class="skills-editorial">
       <div class="skill-row reveal"><div class="skill-category">Languages</div><div class="skill-items">Python · Java · C · JavaScript · SQL</div></div>
-      <div class="skill-row reveal"><div class="skill-category">Cloud & Infra</div><div class="skill-items">Google Cloud Run · Pub/Sub · Firestore · Docker · REST APIs</div></div>
-      <div class="skill-row reveal"><div class="skill-category">Algorithms & DS</div><div class="skill-items">OR-Tools · Bin Packing · LRU Cache · CPU Scheduling · Graph Algorithms</div></div>
-      <div class="skill-row reveal"><div class="skill-category">Systems</div><div class="skill-items">Operating Systems · Networking / BGP · TLS & Security · Concurrency</div></div>
-      <div class="skill-row reveal"><div class="skill-category">Tools</div><div class="skill-items">Git & GitHub · Linux / Bash · VS Code · ReportLab</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Cloud &amp; Infra</div><div class="skill-items">Google Cloud Run · Pub/Sub · Firestore · Docker · REST APIs</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Algorithms &amp; DS</div><div class="skill-items">OR-Tools · Bin Packing · LRU Cache · CPU Scheduling · Graph Algorithms</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Systems</div><div class="skill-items">Operating Systems · Networking / BGP · TLS &amp; Security · Concurrency</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Tools</div><div class="skill-items">Git &amp; GitHub · Linux / Bash · VS Code · ReportLab</div></div>
       <div class="skill-row reveal"><div class="skill-category">Exploring</div><div class="skill-items">Distributed systems · Cloud architecture · Advanced ML</div></div>
     </div>
   </div>
@@ -456,12 +430,12 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <p>Open to grad roles, collabs, and conversations about interesting problems.</p>
       <div class="contact-links">
         <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
-        <a href="https://github.com/gomolemo-modisane" target="_blank" class="contact-link">⌥ GitHub</a>
-        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
+        <a href="https://github.com/gmodisane" target="_blank" class="contact-link">⌥ GitHub</a>
+        <a href="https://www.linkedin.com/in/gomolemo-modisane-284a0b310" target="_blank" class="contact-link">in LinkedIn</a>
       </div>
     </div>
   </div>
-  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+  <footer><span>Gomolemo Modisane</span><span>UCT Cape Town · Pretoria native · 2026</span></footer>
 </div>
 
 <!-- ════════════════ PAGE BUSINESS ════════════════ -->
@@ -472,8 +446,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--fgm);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem">Business Computing</p>
       <h1 class="biz-h1">Software that understands<br>the <em>business</em> it lives in.</h1>
       <p class="hero-lead">
-        I study both CS and Business Computing at UCT. That means I think about <strong>why</strong> software
-        gets built, not just how. I've delivered real work in real teams — with real stakeholders watching. The South African digital economy is where I apply that lens most.
+        I study both CS and Business Computing at UCT. That means I think about <strong>why</strong> software gets built, not just how. I've delivered real work in real teams with real stakeholders watching. The South African digital economy is where I apply that lens most.
       </p>
       <div class="btn-row">
         <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Get in touch</a>
@@ -484,27 +457,27 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   <div class="section">
     <div class="eyebrow reveal">Featured project</div>
     <div class="spotlight-wrap reveal">
-      <div class="spotlight-kicker">Semester Project · UCT · 2025</div>
+      <div class="spotlight-kicker">Semester Project · UCT · 2026</div>
       <div class="spotlight-title">AI-Assisted Marking System</div>
       <div class="spotlight-grid">
         <div class="spotlight-body">
-          <p>Teachers spend hours marking the same types of student responses. This tool uses AI to flag, categorise, and draft feedback on submissions — cutting time per script without removing the human in the loop.</p>
+          <p>Teachers spend hours marking the same types of student responses. This tool uses AI to flag, categorise, and draft feedback on submissions, cutting time per script without removing the human in the loop.</p>
           <p>The mission was simple: <strong>give teachers their evenings back.</strong></p>
-          <p>Built under the sponsorship of <strong>Mr Charles Mayosi</strong> at UCT, the project gave us a real brief, real accountability, and a real stakeholder to present to — not just a tutorial exercise. We had to manage scope, shifting requirements, and five people with different strengths who all needed to contribute meaningfully.</p>
+          <p>Built under the sponsorship of <strong>Mr Charles Mayosi</strong> at UCT, the project gave us a real brief, real accountability, and a real stakeholder to present to. Not just a tutorial exercise. We had to manage scope, shifting requirements, and five people with different strengths who all needed to contribute meaningfully.</p>
 
           <div class="team-block" style="margin-top:1.25rem">
             <div class="team-block-label">On working in a team</div>
-            <p>Five people building one thing sounds simple. It isn't. We had different strengths, different working rhythms, and one deadline. What held it together was <strong>clear ownership</strong> — every component had a name behind it — and the discipline to communicate when something wasn't working rather than quietly working around each other. The best thing a team can do is make disagreement safe. We got better at that as the semester went on.</p>
+            <p>Five people building one thing sounds simple. It isn't. We had different strengths, different working rhythms, and one deadline. What held it together was <strong>clear ownership</strong>. Every component had a name behind it, and the discipline to communicate when something wasn't working rather than quietly working around each other. The best thing a team can do is make disagreement safe. We got better at that as the semester went on.</p>
           </div>
 
           <div class="tags" style="margin-top:1rem"><span class="tag">Python</span><span class="tag">AI</span><span class="tag">EdTech</span><span class="tag">NLP</span><span class="tag">Agile</span><span class="tag">Team of 5</span></div>
         </div>
         <div class="spotlight-meta">
           <div class="meta-block"><div class="meta-label">Sponsor</div><div class="meta-val">Mr Charles Mayosi, UCT</div></div>
-          <div class="meta-block"><div class="meta-label">Team</div><div class="meta-val">5 people — cross-functional, mixed backgrounds</div></div>
+          <div class="meta-block"><div class="meta-label">Team</div><div class="meta-val">5 people, cross-functional, mixed backgrounds</div></div>
           <div class="meta-block"><div class="meta-label">Mission</div><div class="meta-val">Reduce time teachers spend marking using AI assistance</div></div>
           <div class="meta-block"><div class="meta-label">Outcome</div><div class="meta-val">Working prototype generating rubric-aware draft feedback and flagging submissions for teacher review</div></div>
-          <div class="meta-block"><div class="meta-label">Key challenge</div><div class="meta-val">Building AI feedback that teachers would actually trust — generic responses aren't useful, so we iterated on phrasing more than on the model</div></div>
+          <div class="meta-block"><div class="meta-label">Key challenge</div><div class="meta-val">Building AI feedback that teachers would actually trust. Generic responses aren't useful, so we iterated on phrasing more than on the model</div></div>
         </div>
       </div>
     </div>
@@ -514,9 +487,9 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <div class="eyebrow reveal">Skills</div>
     <h2 class="reveal">What Business Computing taught me.</h2>
     <div class="skills-editorial">
-      <div class="skill-row reveal"><div class="skill-category">Project Management</div><div class="skill-items">Agile & Scrum · Risk management · Team dynamics · Stakeholder management · Reflective practice</div></div>
+      <div class="skill-row reveal"><div class="skill-category">Project Management</div><div class="skill-items">Agile &amp; Scrum · Risk management · Team dynamics · Stakeholder management · Reflective practice</div></div>
       <div class="skill-row reveal"><div class="skill-category">Design Thinking</div><div class="skill-items">Problem framing · User-centred design · Prototyping · Iteration · Empathy mapping</div></div>
-      <div class="skill-row reveal"><div class="skill-category">e-Commerce & IS</div><div class="skill-items">POPIA compliance · Platform economics · Digital markets · SA digital context · Business models</div></div>
+      <div class="skill-row reveal"><div class="skill-category">e-Commerce &amp; IS</div><div class="skill-items">POPIA compliance · Platform economics · Digital markets · SA digital context · Business models</div></div>
       <div class="skill-row reveal"><div class="skill-category">Strategy</div><div class="skill-items">Cost-benefit analysis · Requirements analysis · Process modelling · Decision framing</div></div>
       <div class="skill-row reveal"><div class="skill-category">Digital Economy</div><div class="skill-items">Competition law · Self-preferencing · Digital colonialism · Surveillance capitalism · Gig economy</div></div>
       <div class="skill-row reveal"><div class="skill-category">Soft Skills</div><div class="skill-items">Cross-functional teams · Written communication · Stakeholder presentations · Working under ambiguity</div></div>
@@ -529,15 +502,15 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <div class="editorial">
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>01</strong>e-Commerce in South Africa</div>
-        <div class="editorial-content"><p>Studied SA-specific digital commerce: POPIA compliance, platform economics, and the real constraints that load-shedding and data costs place on digital businesses — not in a textbook vacuum.</p></div>
+        <div class="editorial-content"><p>Studied SA-specific digital commerce: POPIA compliance, platform economics, and the real constraints that load-shedding and data costs place on digital businesses. Not in a textbook vacuum.</p></div>
       </div>
       <div class="editorial-block reveal">
-        <div class="editorial-label"><strong>02</strong>Competition Law & Big Tech</div>
+        <div class="editorial-label"><strong>02</strong>Competition Law &amp; Big Tech</div>
         <div class="editorial-content"><p>Interested in how large platforms interact with African markets. Self-preferencing, market dominance, and what good digital regulation looks like in a developing economy context.</p></div>
       </div>
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>03</strong>Surveillance Capitalism</div>
-        <div class="editorial-content"><p>The trade-offs of data-driven business models run deeper than privacy — they reshape power. Studied through an IS lens and applied to platforms operating in SA.</p></div>
+        <div class="editorial-content"><p>Data-driven business models run deeper than privacy concerns. They reshape power. Studied through an IS lens and applied to platforms operating in SA.</p></div>
       </div>
       <div class="editorial-block reveal">
         <div class="editorial-label"><strong>04</strong>The Gig Economy</div>
@@ -550,11 +523,11 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <div class="eyebrow reveal">Journey</div>
     <h2 class="reveal">Where I've been.</h2>
     <div class="timeline">
-      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Started tutoring CSC1015F at UCT</h3><p>Selected as a first-year CS tutor. Renewed for a second year. Teaching forces you to close every gap in your own understanding.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2024</div><div class="tl-content"><h3>Leo Library — reading tutor</h3><p>Worked with young readers in Johannesburg to build literacy skills. Technology only matters if people can access it — that starts long before anyone opens a laptop.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>AI Marking System — first sponsored project</h3><p>Worked in a team of 5 under Mr Charles Mayosi. First time delivering against a real brief with a real stakeholder. Learned what it means to manage scope when the scope keeps moving.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>CutList Optimiser — reverse-engineering a commercial tool</h3><p>Set out to understand how optimisation software like MaxCut works by building my own from scratch. The best way to understand something is to build it yourself.</p></div></div>
-      <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>Final year — completing BSc CS & Business Computing</h3><p>Targeting my first role out of UCT. Ready for a position where both sides of my degree get used.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025–now</div><div class="tl-content"><h3>CS Tutor · UCT</h3><p>Started with CSC1015F in first semester 2025, moved to CSC1016F second semester, then back to CSC1015F in 2026. Three semesters across two courses. Teaching forces you to close every gap in your own understanding.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2025</div><div class="tl-content"><h3>Librarian · Leo Marquard Hall</h3><p>Ran the residential library at UCT for the full year: opening and closing, tracking borrowed books, and helping students with printers and library computers. The first time I was genuinely responsible for a system other people relied on.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>AI Marking System · First sponsored project</h3><p>Worked in a team of 5 under Mr Charles Mayosi. First time delivering against a real brief with a real stakeholder. Learned what it means to manage scope when the scope keeps moving.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>CutList Optimiser · Reverse-engineering a commercial tool</h3><p>Set out to understand how optimisation software like MaxCut works by building my own from scratch. The best way to understand something is to build it yourself.</p></div></div>
+      <div class="tl-row reveal"><div class="tl-yr">2026</div><div class="tl-content"><h3>Final year · BSc CS &amp; Business Computing</h3><p>Finishing strong. Targeting my first role out of UCT. Ready for a position where both sides of my degree get used.</p></div></div>
     </div>
   </div>
 
@@ -564,11 +537,11 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <p>Interested in roles where technical and business thinking both matter.</p>
       <div class="contact-links">
         <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
-        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
+        <a href="https://www.linkedin.com/in/gomolemo-modisane-284a0b310" target="_blank" class="contact-link">in LinkedIn</a>
       </div>
     </div>
   </div>
-  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+  <footer><span>Gomolemo Modisane</span><span>UCT Cape Town · Pretoria native · 2026</span></footer>
 </div>
 
 <!-- ════════════════ PAGE ME ════════════════ -->
@@ -579,7 +552,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <p style="font-family:var(--font-body);font-size:0.78rem;color:var(--fgm);margin-bottom:1.25rem;font-weight:300;letter-spacing:0.05em">just me</p>
       <h1 class="me-h1">I wanted to<br>change the world.</h1>
       <p class="hero-lead" style="font-weight:300">
-        Still do. That's the thread that runs through all of it — the tinkering, the code, the anime at midnight, the family dinner table. This page is the story behind the CV.
+        Still do. That's the thread that runs through all of it: the tinkering, the code, the anime at midnight, the family dinner table. This page is the story behind the CV.
       </p>
       <div class="btn-row">
         <a href="mailto:moenggomolemo33@gmail.com" class="btn btn-solid">Say hi</a>
@@ -595,7 +568,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <div class="origin-beat reveal">
         <div class="origin-era">The Spark<span>Early curiosity</span></div>
         <div class="origin-text">
-          <p>It started with wanting to <strong>invent things</strong>. Not software specifically — just the feeling that things could be different, better, built differently. The idea that one person with the right tools and enough stubbornness could change something real.</p>
+          <p>It started with wanting to <strong>invent things</strong>. Not software specifically. Just the feeling that things could be different, better, built differently. The idea that one person with the right tools and enough stubbornness could change something real.</p>
           <p>I didn't have the vocabulary for it yet. But the aspiration was there long before the laptop was.</p>
         </div>
       </div>
@@ -604,7 +577,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <div class="origin-era">Arduino Era<span>First hardware steps</span></div>
         <div class="origin-text">
           <p>My entry point into building things was <strong>Arduino</strong>. Microcontrollers. Hardware that blinked, buzzed, read sensors, and sometimes just refused to work for reasons I couldn't explain at 1am.</p>
-          <p>I'd research components online and ask my parents to help me buy them — resistors, LEDs, ultrasonic sensors, motor drivers. They didn't always know what any of it was for. They bought it anyway. That meant something.</p>
+          <p>I'd research components online and ask my parents to help me buy them: resistors, LEDs, ultrasonic sensors, motor drivers. They didn't always know what any of it was for. They bought it anyway. That meant something.</p>
           <p>Arduino taught me that the gap between an idea and a working thing is <strong>mostly friction, not impossibility</strong>. You just have to be stubborn enough to sit with the friction.</p>
         </div>
       </div>
@@ -612,7 +585,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <div class="origin-beat reveal">
         <div class="origin-era">Gaming<span>Systems thinking in disguise</span></div>
         <div class="origin-text">
-          <p>I've always gamed. But somewhere along the way I stopped just playing and started <strong>watching how games were built</strong> — the economy systems, the AI decision-making, the way level design nudges you without telling you. Games are some of the most complex interactive systems ever made, and they're designed to feel effortless. That's not an accident.</p>
+          <p>I've always gamed. But somewhere along the way I stopped just playing and started <strong>watching how games were built</strong>: the economy systems, the AI decision-making, the way level design nudges you without telling you. Games are some of the most complex interactive systems ever made, and they're designed to feel effortless. That's not an accident.</p>
           <p>Gaming gave me a way to think about systems, feedback loops, and user experience long before I had names for any of those things.</p>
         </div>
       </div>
@@ -620,7 +593,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <div class="origin-beat reveal">
         <div class="origin-era">CompSci at UCT<span>The umbrella opened</span></div>
         <div class="origin-text">
-          <p>When I got into Computer Science at UCT, it felt like the Arduino experiments and the gaming and the vague want-to-invent-things suddenly had a formal home. CS is the umbrella that covers all of it — algorithms, systems, AI, hardware, software, the web, security. I enrolled wanting to explore everything under it.</p>
+          <p>When I got into Computer Science at UCT, it felt like the Arduino experiments and the gaming and the vague want-to-invent-things suddenly had a formal home. CS is the umbrella that covers all of it: algorithms, systems, AI, hardware, software, the web, security. I enrolled wanting to explore everything under it.</p>
           <p>Adding Business Computing wasn't an afterthought. Software built without understanding the world it enters is incomplete. I wanted <strong>both sides</strong>.</p>
         </div>
       </div>
@@ -631,14 +604,14 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   <div class="section">
     <div class="eyebrow reveal">What anime taught me</div>
     <h2 class="reveal">Lessons from the shows I've watched.</h2>
-    <p class="reveal" style="font-size:0.88rem;color:var(--fgm);line-height:1.85;margin-top:0.5rem;max-width:600px">Yes, genuinely. No apologies. The best anime doesn't just entertain — it teaches you things about persistence and belief that are harder to say out loud.</p>
+    <p class="reveal" style="font-size:0.88rem;color:var(--fgm);line-height:1.85;margin-top:0.5rem;max-width:600px">Yes, genuinely. No apologies. The best anime doesn't just entertain. It teaches you things about persistence and belief that are harder to say out loud.</p>
     <div class="anime-lessons">
 
       <div class="anime-lesson reveal">
         <div class="anime-lesson-num">—</div>
         <div>
           <h4>You don't quit when it gets hard. You quit when you stop caring.</h4>
-          <p>Every shonen protagonist loses. Badly, repeatedly, and publicly. The lesson isn't that they always win — it's that they get back up every single time. That's the whole point. I've taken that seriously. When a bug takes three days, when a project isn't going well, when I don't understand something — I don't quit. I adjust and continue.</p>
+          <p>Every shonen protagonist loses. Badly, repeatedly, and publicly. The lesson isn't that they always win. It's that they get back up every single time. That's the whole point. I've taken that seriously. When a bug takes three days, when a project isn't going well, when I don't understand something, I don't quit. I adjust and continue.</p>
         </div>
       </div>
 
@@ -646,7 +619,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <div class="anime-lesson-num">—</div>
         <div>
           <h4>It takes just one person believing in you to know that you can.</h4>
-          <p>Self-belief matters. But there's something that lands differently when someone else sees what you're capable of before you fully see it yourself. A mentor, a parent, a teacher who picks you for something — that moment of external belief can unlock something internal that couldn't get there alone. I know this because it happened to me. My family has always been that person.</p>
+          <p>Self-belief matters. But there's something that lands differently when someone else sees what you're capable of before you fully see it yourself. A mentor, a parent, a teacher who picks you for something. That moment of external belief can unlock something internal that couldn't get there alone. I know this because it happened to me. My family has always been that person.</p>
         </div>
       </div>
 
@@ -654,7 +627,7 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         <div class="anime-lesson-num">—</div>
         <div>
           <h4>The strongest people carry others, not just themselves.</h4>
-          <p>The characters I respect most in the shows I watch aren't the most individually powerful — they're the ones who bring others with them. Being good at something is the floor. Using it to lift the people around you is the ceiling. That's what tutoring is. That's what the Leo Library was. That's the kind of engineer I want to be.</p>
+          <p>The characters I respect most aren't the most individually powerful. They're the ones who bring others with them. Being good at something is the floor. Using it to lift the people around you is the ceiling. That's what tutoring is. That's what the Leo Library was. That's the kind of engineer I want to be.</p>
         </div>
       </div>
 
@@ -666,20 +639,20 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <h2 class="reveal">Interests outside the IDE.</h2>
     <div class="editorial">
       <div class="editorial-block reveal">
-        <div class="editorial-label"><strong>⛩</strong>Anime</div>
+        <div class="editorial-label">Anime</div>
         <div class="editorial-content"><p>Where I go when I need my brain to stop thinking about systems design for five minutes. Also where I've picked up some of my most durable beliefs about resilience and purpose. No apologies on either count.</p></div>
       </div>
       <div class="editorial-block reveal">
-        <div class="editorial-label"><strong>🎮</strong>Gaming</div>
-        <div class="editorial-content"><p>Not just a hobby — games are some of the most complex interactive systems ever built. I pay attention to how they're designed, not just how they play. Economy systems, AI behaviour, difficulty curves that feel fair. All of it is systems thinking with a controller in your hand.</p></div>
+        <div class="editorial-label">Gaming</div>
+        <div class="editorial-content"><p>Not just a hobby. Games are some of the most complex interactive systems ever built. I pay attention to how they're designed, not just how they play. Economy systems, AI behaviour, difficulty curves that feel fair. All of it is systems thinking with a controller in your hand.</p></div>
       </div>
       <div class="editorial-block reveal">
-        <div class="editorial-label"><strong>🔌</strong>Arduino & Hardware</div>
-        <div class="editorial-content"><p>Where it all started. Microcontrollers are how I end up at 1am wondering why a sensor won't read properly. I like problems that fight back — and hardware fights back in ways that software doesn't. You can't mock a broken circuit.</p></div>
+        <div class="editorial-label">Arduino &amp; Hardware</div>
+        <div class="editorial-content"><p>Where it all started. Microcontrollers are how I end up at 1am wondering why a sensor won't read properly. I like problems that fight back, and hardware fights back in ways that software doesn't. You can't mock a broken circuit.</p></div>
       </div>
       <div class="editorial-block reveal">
-        <div class="editorial-label"><strong>🌍</strong>African Tech</div>
-        <div class="editorial-content"><p>Building software differently when your context is South Africa — not Silicon Valley. Load-shedding, data costs, connectivity gaps. These aren't edge cases. They're the brief. Working within them makes you a better engineer, not a limited one.</p></div>
+        <div class="editorial-label">African Tech</div>
+        <div class="editorial-content"><p>Building software in South Africa means your context isn't Silicon Valley. Load-shedding, data costs, connectivity gaps. These aren't edge cases. They're the brief. Working within them makes you a better engineer, not a limited one.</p></div>
       </div>
     </div>
   </div>
@@ -689,27 +662,27 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <h2 class="reveal">What I'm built on.</h2>
     <div class="values-grid reveal">
       <div class="value-cell">
-        <div class="value-icon">✝</div>
+        <div class="value-icon" style="font-family:var(--font-mono);font-size:1.1rem;color:var(--accent)">†</div>
         <div class="value-name">God</div>
         <div class="value-sub">The foundation. Everything starts here.</div>
       </div>
       <div class="value-cell">
-        <div class="value-icon">🏠</div>
+        <div class="value-icon" style="font-family:var(--font-mono);font-size:1.1rem;color:var(--accent)">//</div>
         <div class="value-name">Family</div>
         <div class="value-sub">The people who believed before I did. The reason I keep going.</div>
       </div>
       <div class="value-cell">
-        <div class="value-icon">🪞</div>
+        <div class="value-icon" style="font-family:var(--font-mono);font-size:1.1rem;color:var(--accent)">∴</div>
         <div class="value-name">Myself</div>
         <div class="value-sub">Knowing who I am. Staying honest about where I need to grow.</div>
       </div>
       <div class="value-cell">
-        <div class="value-icon">{ }</div>
+        <div class="value-icon" style="font-family:var(--font-mono);font-size:1.1rem;color:var(--accent)">{}</div>
         <div class="value-name">Code</div>
         <div class="value-sub">The craft. The tool. The way I try to make things better.</div>
       </div>
     </div>
-    <p class="reveal" style="font-size:0.84rem;color:var(--fgm);line-height:1.85;margin-top:1.5rem;max-width:580px">My family bought Arduino parts they didn't understand so I could build things I barely understood. They came to demo days. They asked questions about my projects. They told me I was capable of this when I wasn't sure. That kind of faith isn't nothing — it's everything. Whatever I build, I build for them too.</p>
+    <p class="reveal" style="font-size:0.84rem;color:var(--fgm);line-height:1.85;margin-top:1.5rem;max-width:580px">My family bought Arduino parts they didn't understand so I could build things I barely understood. They came to demo days. They asked questions about my projects. They told me I was capable of this when I wasn't sure. That kind of faith isn't nothing. It's everything. Whatever I build, I build for them too.</p>
   </div>
 
   <div class="section">
@@ -718,9 +691,9 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <div class="tried-flow">
       <span class="tried-pill reveal">Web development</span>
       <span class="tried-pill reveal">Mobile apps</span>
-      <span class="tried-pill reveal">Arduino & hardware</span>
+      <span class="tried-pill reveal">Arduino &amp; hardware</span>
       <span class="tried-pill reveal">Cloud infrastructure</span>
-      <span class="tried-pill reveal">AI & machine learning</span>
+      <span class="tried-pill reveal">AI &amp; machine learning</span>
       <span class="tried-pill reveal">Systems programming</span>
       <span class="tried-pill reveal">Game development</span>
       <span class="tried-pill reveal">Algorithm design</span>
@@ -740,19 +713,15 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     <div class="takes">
       <div class="take reveal">
         <div class="take-label">On building in South Africa</div>
-        <div class="take-text">Building software here means accepting constraints that most tutorials were never designed around. Load-shedding, data costs, connectivity gaps — these aren't edge cases. They're the brief. Working within them makes you a better engineer.</div>
+        <div class="take-text">Building software here means accepting constraints that most tutorials were never designed around. Load-shedding, data costs, connectivity gaps. These aren't edge cases. They're the brief. Working within them makes you a better engineer.</div>
       </div>
       <div class="take reveal">
         <div class="take-label">On trying things before you're ready</div>
         <div class="take-text">I picked up Arduino without knowing anything about electronics. Started tutoring before I felt like an expert. The curiosity comes first. The competence follows. Waiting until you're ready just means waiting.</div>
       </div>
       <div class="take reveal">
-        <div class="take-label">On GPA vs capability</div>
-        <div class="take-text">A number tells you how well someone handles a specific kind of pressure in a specific kind of system. It doesn't tell you whether they can actually build things. Both matter. Neither is everything.</div>
-      </div>
-      <div class="take reveal">
         <div class="take-label">On this website</div>
-        <div class="take-text">Most portfolio sites look the same because most portfolio advice is the same. I built this one with three modes because I'm not one thing — and I was curious whether you could tell the difference between them.</div>
+        <div class="take-text">Most portfolio sites look the same because most portfolio advice is the same. I built this one with three modes because I'm not one thing, and I was curious whether you could tell the difference between them.</div>
       </div>
     </div>
   </div>
@@ -763,16 +732,15 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       <p>If something on this page resonated, my inbox is open.</p>
       <div class="contact-links">
         <a href="mailto:moenggomolemo33@gmail.com" class="contact-link">✉ Email</a>
-        <a href="https://linkedin.com/in/gomolemo-modisane" target="_blank" class="contact-link">in LinkedIn</a>
-        <a href="https://github.com/gomolemo-modisane" target="_blank" class="contact-link">⌥ GitHub</a>
+        <a href="https://www.linkedin.com/in/gomolemo-modisane-284a0b310" target="_blank" class="contact-link">in LinkedIn</a>
+        <a href="https://github.com/gmodisane" target="_blank" class="contact-link">⌥ GitHub</a>
       </div>
     </div>
   </div>
-  <footer><span>Gomolemo Modisane</span><span>UCT · Johannesburg · 2026</span></footer>
+  <footer><span>Gomolemo Modisane</span><span>UCT Cape Town · Pretoria native · 2026</span></footer>
 </div>
 
 <script>
-// ── CANVAS: CS — particle network ──────────────────────────
 (function(){
   const c=document.getElementById('canvas-cs');
   const ctx=c.getContext('2d');
@@ -810,7 +778,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   draw();
 })();
 
-// ── CANVAS: BIZ — drifting geometric shapes ────────────────
 (function(){
   const canvas=document.getElementById('canvas-biz');
   const ctx=canvas.getContext('2d');
@@ -818,7 +785,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   canvas.height=window.innerHeight;
   window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
   let angle=0;
-  // Multiple orbiting nodes to suggest a team / network
   const nodes=[
     {dist:110,speed:0.007,phase:0,r:5,color:'rgba(160,105,42,0.7)'},
     {dist:145,speed:0.005,phase:1.2,r:4,color:'rgba(160,105,42,0.5)'},
@@ -831,7 +797,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     const cx=canvas.width*0.68;
     const cy=canvas.height*0.45;
     angle+=0.005;
-    // draw connection lines between nodes
     const positions=nodes.map(n=>({
       x:cx+Math.cos(angle*n.speed/0.005+n.phase)*n.dist,
       y:cy+Math.sin(angle*n.speed/0.005+n.phase)*(n.dist*0.38)
@@ -845,15 +810,12 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
         }
       }
     }
-    // central hub
     ctx.beginPath();ctx.arc(cx,cy,28,0,Math.PI*2);
     ctx.fillStyle='rgba(160,105,42,0.18)';ctx.fill();
     ctx.beginPath();ctx.arc(cx,cy,18,0,Math.PI*2);
     ctx.fillStyle='rgba(160,105,42,0.35)';ctx.fill();
-    // outer ring
     ctx.beginPath();ctx.ellipse(cx,cy,130,50,Math.PI/8,0,Math.PI*2);
     ctx.strokeStyle='rgba(160,105,42,0.08)';ctx.lineWidth=1;ctx.stroke();
-    // nodes
     nodes.forEach((n,i)=>{
       ctx.beginPath();ctx.arc(positions[i].x,positions[i].y,n.r,0,Math.PI*2);
       ctx.fillStyle=n.color;ctx.fill();
@@ -863,7 +825,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   draw();
 })();
 
-// ── CANVAS: ME — anime-inspired energy lines + soft orbs ──
 (function(){
   const c=document.getElementById('canvas-me');
   const ctx=c.getContext('2d');
@@ -877,7 +838,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
     {bx:0.12,by:0.72,r:0.13,spd:0.0009,phase:0.8},
     {bx:0.88,by:0.62,r:0.15,spd:0.0008,phase:3.3},
   ];
-  // floating particles for energy feel
   const sparks=Array.from({length:28},()=>({
     x:Math.random(),y:Math.random(),
     vx:(Math.random()-0.5)*0.0002,
@@ -899,7 +859,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
       ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
       ctx.fillStyle=g;ctx.fill();
     });
-    // sparks
     sparks.forEach(s=>{
       s.x+=s.vx;s.y+=s.vy;
       if(s.x<0)s.x=1;if(s.x>1)s.x=0;
@@ -913,7 +872,6 @@ footer{padding:1.5rem 2.5rem;border-top:1px solid var(--border);font-size:0.75re
   draw();
 })();
 
-// ── MODE SWITCHING ─────────────────────────────────────────
 const navTabs=document.querySelectorAll('.nav-tab');
 const pages=document.querySelectorAll('.page');
 const canvases={cs:document.getElementById('canvas-cs'),biz:document.getElementById('canvas-biz'),me:document.getElementById('canvas-me')};
@@ -933,12 +891,11 @@ navTabs.forEach(tab=>{
   });
 });
 
-// ── TYPEWRITER ─────────────────────────────────────────────
 const seqs=[
   {name:'Gomolemo Modisane',sub:'Software Developer & CS Student at UCT.'},
   {name:'Gomolemo Modisane',sub:'Building systems that actually work.'},
   {name:'Gomolemo Modisane',sub:'Business Computing. Because context matters.'},
-  {name:'Gomolemo Modisane',sub:'Tutor. Builder. Johannesburg native.'},
+  {name:'Gomolemo Modisane',sub:'Tutor. Builder. Pretoria native.'},
   {name:'Gomolemo Modisane',sub:"If it involves code, I've probably tried it."},
 ];
 let si=0,ci=0,phase='type-name';
@@ -954,7 +911,6 @@ function tw(){
 }
 tw();
 
-// ── SCROLL REVEAL ──────────────────────────────────────────
 function triggerReveal(){
   const els=document.querySelectorAll('.page.active .reveal');
   const obs=new IntersectionObserver((entries)=>{
@@ -968,4 +924,3 @@ triggerReveal();
 </script>
 </body>
 </html>
-t
